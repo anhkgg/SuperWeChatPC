@@ -11,3 +11,7 @@
 # 更多
 
 详细内容请看源码和博客[https://anhkgg.github.io/wechat-multi-pc](https://anhkgg.github.io/wechat-multi-pc)
+
+# 微信捐助
+
+[!img](wechatpay.png)
