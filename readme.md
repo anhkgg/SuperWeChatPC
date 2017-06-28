@@ -14,4 +14,4 @@
 
 # Î¢ĞÅ¾èÖú
 
-[!img](wechatpay.png)
+![img](wechatpay.png)
