@@ -4,7 +4,7 @@
 微信电脑客户端多开工具，支持防消息撤销。
 
 **v1.1**：
-1. WeChatResource目录是防撤销插件源码，暂时只支持固定版本2.6.5.38，如有需要请联系我兼容或者自行修改。
+1. WeChatResource目录是防撤销插件源码，暂时只支持固定版本(2.6.5.38，2.6.6.25），如有需要请联系我兼容或者自行修改。
 2. MultiWeChat是多开源码
 3. bin目录是已经编译好可直接使用的文件。
 
@@ -18,7 +18,7 @@
 **2018年11月30日(v1.1)**：
 1. 增加消息防撤销功能，暂时只支持固定版本(2.6.5.38，2.6.6.25），如有需要请联系我兼容或者自行修改。
 2. MultiWeChat增加更新安装防撤消插件和更新插件功能。
-3. [下载地址](https://github.com/anhkgg/multi_wechat_pc/releases/tag/v1.1)
+3. [下载地址](https://github.com/anhkgg/multi_wechat_pc/releases/tag/v1.1.1)
 
 **v0.0.1**：
 1. 仅支持多开功能，[下载地址](https://github.com/anhkgg/multi_wechat_pc/releases/tag/v0.0.1)
