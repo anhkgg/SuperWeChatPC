@@ -229,7 +229,34 @@ Exit0:
 	return 0;
 }
 
-void OpenWeChat()
+
+bool InstallRevokeDll(LPWSTR Path, bool Update)
+{
+	WCHAR wszDll[MAX_PATH] = { 0 };
+	WCHAR wszDllOrig[MAX_PATH] = { 0 };
+	WCHAR wszDll1[MAX_PATH] = { 0 };
+	GetModuleFileName(NULL, wszDll, MAX_PATH);
+	PathRemoveFileSpec(wszDll);
+	wcscpy_s(wszDll1, Path);
+	PathAppend(wszDll, L"WeChatResource.dll");
+	PathAppend(wszDll1, L"WeChatResource.dll.1");
+	wcscpy_s(wszDllOrig, Path);
+	PathAppend(wszDllOrig, L"WeChatResource.dll");
+
+	
+	if (!PathFileExists(wszDll1)) {
+		MoveFile(wszDllOrig, wszDll1);
+	}
+
+	if (Update) {
+		MoveFileEx(wszDll, NULL, MOVEFILE_DELAY_UNTIL_REBOOT);
+	}
+	CopyFile(wszDll, wszDllOrig, false);
+
+	return true;
+}
+
+void OpenWeChat(bool Update)
 {
 	//HKEY_CURRENT_USER\Software\Tencent\WeChat InstallPath = xx
 	HKEY hKey = NULL;
@@ -245,6 +272,8 @@ void OpenWeChat()
 	{
 		goto __exit;
 	}
+
+	InstallRevokeDll(Path, Update);
 	
 	PathAppend(Path, L"WeChat.exe");
 
@@ -257,7 +286,8 @@ __exit:
 	}
 }
 
-int main()
+
+int main(int argc, char* argv[])
 {
 	//TEST
 	//\Sessions\1\BaseNamedObjects\_WeChat_App_Instance_Identity_Mutex_Name
@@ -266,9 +296,9 @@ int main()
 	//DUPLICATE_CLOSE_SOURCE
 
 	printf("------------------------------------------------------------\n");
-	printf("--------------- WeChat电脑端多开器 -------------------------\n");
-	printf("--------------- 2017年5月14日 Anhkgg -----------------------\n");
-	printf("--------------- CopyRight (C) 2017 by Anhkgg ---------------\n");
+	printf("--------------- WeChat电脑端多开器(防撤销）-----------------\n");
+	printf("--------------- 2018年11月30日 Anhkgg -----------------------\n");
+	printf("--------------- CopyRight (C) 2018 by Anhkgg ---------------\n");
 	printf("------------------------------------------------------------\n\n");
 	
 	
@@ -278,7 +308,14 @@ int main()
 
 	printf("+ Start new wechat!\n");
 
-	OpenWeChat();
+	bool update = false;
+
+	if (argc == 2 && argv[1][0] == 'n') {
+		update = true;
+		printf("+ Update...\n");
+	}
+
+	OpenWeChat(update);
 
 	printf("+ Exit...\n");
 
