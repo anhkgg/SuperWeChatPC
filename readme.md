@@ -20,7 +20,7 @@
 2. MultiWeChat增加更新安装防撤消插件和更新插件功能。
 
 **v0.0.1**：
-1. 仅支持多开功能
+1. 仅支持多开功能，[下载地址](https://github.com/anhkgg/multi_wechat_pc/releases/tag/v0.0.1)
 
 # 更多
 
