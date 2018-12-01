@@ -19,6 +19,7 @@
 1. 增加消息防撤销功能，暂时只支持固定版本(2.6.5.38，2.6.6.25），如有需要请联系我兼容或者自行修改。
 2. MultiWeChat增加更新安装防撤消插件和更新插件功能。
 3. [下载地址](https://github.com/anhkgg/multi_wechat_pc/releases/tag/v1.1.1)
+4. multi_wechat_pc更名为SuperWeChatPC
 
 **v0.0.1**：
 1. 仅支持多开功能，[下载地址](https://github.com/anhkgg/multi_wechat_pc/releases/tag/v0.0.1)
@@ -38,4 +39,4 @@
 
 # 支持作者
 
-![img](wechatpay.png)
+![img](pay.png)
