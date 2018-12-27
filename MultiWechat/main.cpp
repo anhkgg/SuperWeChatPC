@@ -192,7 +192,10 @@ int PatchWeChat()
 			// 匹配是否为需要关闭的句柄名称
 			if (0 == wcscmp(TypName, L"Mutant"))
 			{
-				if (wcsstr(Name, L"_WeChat_App_Instance_Identity_Mutex_Name"))
+				//WeChat_aj5r8jpxt_Instance_Identity_Mutex_Name
+				//if (wcsstr(Name, L"_WeChat_App_Instance_Identity_Mutex_Name"))
+				if (wcsstr(Name, L"_WeChat_") &&
+					wcsstr(Name, L"_Instance_Identity_Mutex_Name"))
 				{
 					CloseHandle(hHandle);
 

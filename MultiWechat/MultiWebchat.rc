@@ -13,13 +13,11 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// 中文(中华人民共和国) resources
+// 中文(简体，中国) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
-#ifdef _WIN32
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
 #pragma code_page(936)
-#endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
 /////////////////////////////////////////////////////////////////////////////
@@ -53,8 +51,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,0,0,1
- PRODUCTVERSION 1,0,0,1
+ FILEVERSION 1,1,2,0
+ PRODUCTVERSION 1,1,2,0
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -71,12 +69,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Anhkgg. China"
             VALUE "FileDescription", "WeChat电脑端多开器"
-            VALUE "FileVersion", "1, 0, 0, 1"
+            VALUE "FileVersion", "1.1.2.0"
             VALUE "InternalName", "MultiWeChat"
             VALUE "LegalCopyright", "Copyright (C) 2017 by Anhkgg"
             VALUE "OriginalFilename", "MultiWeChat.exe"
             VALUE "ProductName", "WeChat电脑端多开器"
-            VALUE "ProductVersion", "1, 0, 0, 1"
+            VALUE "ProductVersion", "1.1.2.0"
         END
     END
     BLOCK "VarFileInfo"
@@ -94,7 +92,8 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_ICON1               ICON                    "wechat.ico"
-#endif    // 中文(中华人民共和国) resources
+
+#endif    // 中文(简体，中国) resources
 /////////////////////////////////////////////////////////////////////////////
 
 
