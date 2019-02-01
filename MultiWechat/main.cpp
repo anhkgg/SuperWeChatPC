@@ -5,6 +5,9 @@
 #include "main.h"
 #include <stdio.h>
 
+#pragma comment(lib, "Advapi32")
+#pragma comment(lib, "Shell32")
+
 //进程提权
 BOOL ElevatePrivileges()
 {
@@ -238,14 +241,24 @@ bool InstallRevokeDll(LPWSTR Path, bool Update)
 	WCHAR wszDll[MAX_PATH] = { 0 };
 	WCHAR wszDllOrig[MAX_PATH] = { 0 };
 	WCHAR wszDll1[MAX_PATH] = { 0 };
+    WCHAR wszConfig[MAX_PATH] = { 0 };
+    WCHAR wszConfig1[MAX_PATH] = { 0 };
+
 	GetModuleFileName(NULL, wszDll, MAX_PATH);
-	PathRemoveFileSpec(wszDll);
-	wcscpy_s(wszDll1, Path);
+	PathRemoveFileSpec(wszDll);    
+   
+    wcscpy_s(wszConfig1, Path);
+    PathAppend(wszConfig1, L"superwx.ini");
+    wcscpy_s(wszConfig, wszDll);
+    PathAppend(wszConfig, L"superwx.ini");
+
+    CopyFile(wszConfig, wszConfig1, false);
+
+    wcscpy_s(wszDll1, Path);
 	PathAppend(wszDll, L"WeChatResource.dll");
 	PathAppend(wszDll1, L"WeChatResource.dll.1");
 	wcscpy_s(wszDllOrig, Path);
 	PathAppend(wszDllOrig, L"WeChatResource.dll");
-
 	
 	if (!PathFileExists(wszDll1)) {
 		MoveFile(wszDllOrig, wszDll1);
