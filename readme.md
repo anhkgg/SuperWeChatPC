@@ -11,7 +11,7 @@
 
 1. 双击运行WeChat多开(防撤销).exe即可。
 2. 如更新了WeChatResource.dll，请使用如下参数运行：`WeChat多开(防撤销).exe n`。
-3. `superex.ini`配置如下：
+3. `superwx.ini`配置如下：
 ```
 	[config]
 	revokemsg=1  #0：关闭防消息撤销，1：打开消息防撤销
@@ -22,7 +22,7 @@
 
 **2019年2月1日(v1.1.3)**
 1. 增加支持语音消息备份（仅支持2.6.6.28），只是个demo，有特殊需要请自行修改或者联系我。
-2. 增加`superex.ini`配置文件，可自行开关防消息撤销和语音消息备份
+2. 增加`superwx.ini`配置文件，可自行开关防消息撤销和语音消息备份
 3. [下载地址](https://github.com/anhkgg/SuperWeChatPC/releases/tag/v1.1.3)
 
 **2018年12月28日(v1.1.2)**
