@@ -43,12 +43,13 @@
 
 技术细节请参考文章：
 
-1. [https://mp.weixin.qq.com/s/bb7XMxop7e8rd7YqQ88nyA](https://mp.weixin.qq.com/s/bb7XMxop7e8rd7YqQ88nyA)
-2. [https://mp.weixin.qq.com/s/E7N6LzAH4p88Gu4f_qwGlg](https://mp.weixin.qq.com/s/E7N6LzAH4p88Gu4f_qwGlg)
+1. [https://mp.weixin.qq.com/s/bb7XMxop7e8rd7YqQ88nyA](https://mp.weixin.qq.com/s/bb7XMxop7e8rd7YqQ88nyA)（多开）
+2. [https://mp.weixin.qq.com/s/E7N6LzAH4p88Gu4f_qwGlg](https://mp.weixin.qq.com/s/E7N6LzAH4p88Gu4f_qwGlg)（消息防撤销）
+3. [https://mp.weixin.qq.com/s/h9d8aO79OvkpV9bknVT60A](https://mp.weixin.qq.com/s/h9d8aO79OvkpV9bknVT60A)（备份语音）
 
 # TODO
 
-1. 消息备份
+1. 加好友
 2. 批量回复，发送、定时发送
 3. ....
 
