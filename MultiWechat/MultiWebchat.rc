@@ -51,8 +51,8 @@ END
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,1,3,0
- PRODUCTVERSION 1,1,3,0
+ FILEVERSION 1,1,3,1
+ PRODUCTVERSION 1,1,3,1
  FILEFLAGSMASK 0x17L
 #ifdef _DEBUG
  FILEFLAGS 0x1L
@@ -69,12 +69,12 @@ BEGIN
         BEGIN
             VALUE "CompanyName", "Anhkgg. China"
             VALUE "FileDescription", "WeChat电脑端多开器"
-            VALUE "FileVersion", "1.1.3.0"
+            VALUE "FileVersion", "1.1.3.1"
             VALUE "InternalName", "MultiWeChat"
             VALUE "LegalCopyright", "Copyright (C) 2017 by Anhkgg"
             VALUE "OriginalFilename", "MultiWeChat.exe"
             VALUE "ProductName", "WeChat电脑端多开器"
-            VALUE "ProductVersion", "1.1.3.0"
+            VALUE "ProductVersion", "1.1.3.1"
         END
     END
     BLOCK "VarFileInfo"
