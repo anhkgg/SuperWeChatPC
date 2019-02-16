@@ -20,6 +20,10 @@
 
 # 更新日志
 
+**2019年2月16日(v1.1.3)**
+1. v1.1.3.2，更新支持2.6.6.44
+2. bin目录为最新可执行文件[下载地址](https://github.com/anhkgg/SuperWeChatPC/tree/master/bin)
+
 **2019年2月13日(v1.1.3)**
 1. 更新支持2.6.7.32
 2. bin目录为最新可执行文件[下载地址](https://github.com/anhkgg/SuperWeChatPC/tree/master/bin)
