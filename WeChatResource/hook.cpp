@@ -13,6 +13,7 @@ const SuppWxCfg g_Supported_wxVoiceMsg_Version[] = {
     { TEXT("2.6.6.28"), 0x24D5A0 ,{0}}, //voiicemsg
     { TEXT("2.6.6.44"), 0x24D970 ,{0}}, //voiicemsg
     { TEXT("2.6.7.32"), 0x254ED0 ,{0}}, //voiicemsg
+    { TEXT("2.6.7.40"), 0x254F50 ,{0}}, //voiicemsg
 };
 
 bool InitHook()

@@ -7,6 +7,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MultiWeChat", "MultiWebchat
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatResource", "..\WeChatResource\WeChatResource.vcxproj", "{CC8544D5-1A6E-4515-B737-4DA205371032}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatSDK", "..\WeChatSDK\WeChatSDK.vcxproj", "{3863B180-E079-4735-ABF7-13552EE0C3F1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatSDKTest", "..\WeChatSDKTest\WeChatSDKTest.vcxproj", "{00EC6E77-8926-4860-A73F-3E5DBBE6221B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -29,6 +33,22 @@ Global
 		{CC8544D5-1A6E-4515-B737-4DA205371032}.Release|Win32.Build.0 = Release|Win32
 		{CC8544D5-1A6E-4515-B737-4DA205371032}.Release|x64.ActiveCfg = Release|x64
 		{CC8544D5-1A6E-4515-B737-4DA205371032}.Release|x64.Build.0 = Release|x64
+		{3863B180-E079-4735-ABF7-13552EE0C3F1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3863B180-E079-4735-ABF7-13552EE0C3F1}.Debug|Win32.Build.0 = Debug|Win32
+		{3863B180-E079-4735-ABF7-13552EE0C3F1}.Debug|x64.ActiveCfg = Debug|x64
+		{3863B180-E079-4735-ABF7-13552EE0C3F1}.Debug|x64.Build.0 = Debug|x64
+		{3863B180-E079-4735-ABF7-13552EE0C3F1}.Release|Win32.ActiveCfg = Release|Win32
+		{3863B180-E079-4735-ABF7-13552EE0C3F1}.Release|Win32.Build.0 = Release|Win32
+		{3863B180-E079-4735-ABF7-13552EE0C3F1}.Release|x64.ActiveCfg = Release|x64
+		{3863B180-E079-4735-ABF7-13552EE0C3F1}.Release|x64.Build.0 = Release|x64
+		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Debug|Win32.Build.0 = Debug|Win32
+		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Debug|x64.ActiveCfg = Debug|x64
+		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Debug|x64.Build.0 = Debug|x64
+		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Release|Win32.ActiveCfg = Release|Win32
+		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Release|Win32.Build.0 = Release|Win32
+		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Release|x64.ActiveCfg = Release|x64
+		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
