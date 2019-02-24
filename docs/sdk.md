@@ -19,16 +19,17 @@
 ```
 bin             //老版本
 docs            //文档
-sdk             //vs2017编译完成的sdk模块
-common          //公共目录
-WeChatSDK       //WeChatSDK.dll
-WeChatRc        //WeChatRs.dll
-WeChatRs        //WeChatRc.dll
-WeChatSDKCore   //WeChatSDKCore.dll
-WeChatSDKTest   //SDK示例，普通用户多开工具
+sdk             //vs2017 x86编译完成的sdk模块
+src 
+ |- common          //公共目录
+ |- WeChatSDK       //WeChatSDK.dll
+ |- WeChatRc        //WeChatRs.dll
+ |- WeChatRs        //WeChatRc.dll
+ |- WeChatSDKCore   //WeChatSDKCore.dll
+ |- WeChatSDKTest   //SDK示例，普通用户多开工具
 ```
 
-编译顺序：
+编译顺序(vs2017 x86)：
 
 ```
 WeChatRs -> WeChatRc -> WeChatSDK -> WeChatSDKCore
@@ -44,7 +45,7 @@ bool WXIsWechatAlive(DWORD pid);
 检查微信是否启动成功，pid是WXOpenWechat返回值。返回true为成功。
 
 int WXInitialize(DWORD pid);
-初始化WeChatSDK。在调用其他接口之前需要调用此接口，否则SDK无法正常工作。pid是WXOpenWechat返回值。返回0表示成功。
+初始化WeChatSDK。在调用其他接口之前需要调用此接口，否则SDK无法正常工作。pid是WXOpenWechat返回值。返回0表示成功。由于涉及到注入功能，如引起杀毒软件误报，请通过。
 
 int WXUninitialize(DWORD pid);
 反初始化WeChatSDK，卸载SDK，一般不需要调用。pid是WXOpenWechat返回值。返回0表示成功。
