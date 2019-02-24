@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="common">
-      <UniqueIdentifier>{3d79ba98-0f98-48f7-b79b-da84d5c31eb2}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -26,12 +23,6 @@
     </ClInclude>
     <ClInclude Include="sdk.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="message.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="client.h">
-      <Filter>源文件</Filter>
     </ClInclude>
     <ClInclude Include="openwechat.h">
       <Filter>头文件</Filter>
@@ -47,20 +38,11 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="WeChatSDK.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="sdk.cpp">
       <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="message.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="client.cpp">
-      <Filter>头文件</Filter>
     </ClCompile>
     <ClCompile Include="openwechat.cpp">
       <Filter>源文件</Filter>

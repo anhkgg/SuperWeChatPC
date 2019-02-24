@@ -154,8 +154,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\common\version.h" />
-    <ClInclude Include="client.h" />
-    <ClInclude Include="message.h" />
     <ClInclude Include="openwechat.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="sdk.h" />
@@ -164,8 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp" />
-    <ClCompile Include="client.cpp" />
-    <ClCompile Include="message.cpp" />
     <ClCompile Include="openwechat.cpp" />
     <ClCompile Include="sdk.cpp" />
     <ClCompile Include="stdafx.cpp">
@@ -174,7 +170,6 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="WeChatSDK.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sdk.def" />

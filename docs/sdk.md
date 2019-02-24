@@ -28,6 +28,12 @@ WeChatSDKCore   //WeChatSDKCore.dll
 WeChatSDKTest   //SDK示例，普通用户多开工具
 ```
 
+编译顺序：
+
+```
+WeChatRs -> WeChatRc -> WeChatSDK -> WeChatSDKCore
+```
+
 ## WeChatSDK接口
 
 ```
