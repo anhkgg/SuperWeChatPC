@@ -1,0 +1,11 @@
+EXPORTS
+	WXOpenWechat
+	WXIsWechatAlive
+	WXInitialize
+	WXUninitialize
+	WXIsWechatSDKOk 
+	WXAntiRevokeMsg
+	WXUnAntiRevokeMsg
+	WXSaveVoiceMsg
+	WXUnSaveVoiceMsg
+	WXSendTextMsg
