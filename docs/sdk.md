@@ -80,6 +80,19 @@ int WXSendTextMsg(DWORD pid, const wchar_t* wxid, const wchar_t* msg);
 
 详细请参考`WeChatSDKTest`使用方法。
 
+另外同步发布`Python`版本的接口，具体使用见`src/WeChatSDKPy/sdk.py`。
+
+```
+wxsdk = WXSDK()
+print(wxsdk.WXOpenWechat())
+input("wait for...")
+print(wxsdk.WXIsWechatAlive())
+print(wxsdk.WXIsWechatSDKOk())
+print(wxsdk.WXInitialize())
+input("wait for...")
+print(wxsdk.WXSendTextMsg("wxid_n11111", "This is a python sdk test msg"))
+```
+
 ## TODO
 
 1. 加好友接口
