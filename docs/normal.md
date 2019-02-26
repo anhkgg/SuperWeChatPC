@@ -6,6 +6,12 @@
 
 持续更新版本，直接下载[sdk/SuperWeChat.zip](https://github.com/anhkgg/SuperWeChatPC/raw/master/sdk/SuperWeChat.zip)即可。
 
+默认开启消息防撤回功能，如果需要开启语音备份功能，请使用`SuperWeChat(语音备份).bat`获取输入一下命令：
+
+```
+SuperWeChat.exe c:\wxmsg
+```
+
 ### 2. 仅需要多开
 
 下载[bin/WeChat多开v0.0.1.exe](https://github.com/anhkgg/SuperWeChatPC/raw/master/bin/WeChat%E5%A4%9A%E5%BC%80v0.0.1.exe)，双击即可直接使用。
