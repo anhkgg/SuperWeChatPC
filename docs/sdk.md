@@ -102,6 +102,10 @@ print(wxsdk.WXSendTextMsg("wxid_n11111", "This is a python sdk test msg"))
 5. 加群好友
 6. ...
 
+后续更新请关注公众号推送。
+
+![img](wx.png)
+
 欢迎PR或提供意见建议。
 
 **开源不易，无数深夜的寒风需要你的点滴暖意。**
