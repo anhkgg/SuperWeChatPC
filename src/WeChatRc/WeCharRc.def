@@ -1,0 +1,4 @@
+EXPORTS
+	ConnectSDKServer
+	DisconnectSDKServer
+	GetSDKInterface
