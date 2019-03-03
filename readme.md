@@ -14,7 +14,7 @@
 3. 语音消息备份（`>=2.6.6.28`）
 4. 消息发送接口（`>=2.6.6.44`）
 
-**`WeChatSDK`目前已经开放`C++`、`Python`、`Java`接口。**具体请看[WeChatSDK开发指南](docs/sdk.md)。
+**`WeChatSDK`目前已经开放`C++`、`Python`、`Java`接口。** 具体请看[WeChatSDK开发指南](docs/sdk.md)。
 
 更新详情请看[更新日志](update.md)
 
