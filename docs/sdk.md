@@ -39,7 +39,7 @@ WeChatRs -> WeChatRc -> WeChatSDK -> WeChatSDKCore
 
 ```
 int WXOpenWechat();
-启动微信，支持多开。返回值是微信进程pid，需保存用于后续接口调用。pid即代表多开的每个微信进程，指定pid调用接口使用操作对应的微信。
+启动微信，支持多开。返回值是微信进程pid，需保存用于后续接口调用。pid即代表多开的每个微信进程，指定pid调用接口使用操作对应的微信。**注意：该接口需要管理员权限。**
 
 bool WXIsWechatAlive(DWORD pid);
 检查微信是否启动成功，pid是WXOpenWechat返回值。返回true为成功。
@@ -80,18 +80,7 @@ int WXSendTextMsg(DWORD pid, const wchar_t* wxid, const wchar_t* msg);
 
 详细请参考`WeChatSDKTest`使用方法。
 
-另外同步发布`Python`版本的接口，具体使用见`src/WeChatSDKPy/sdk.py`。
-
-```
-wxsdk = WXSDK()
-print(wxsdk.WXOpenWechat())
-input("wait for...")
-print(wxsdk.WXIsWechatAlive())
-print(wxsdk.WXIsWechatSDKOk())
-print(wxsdk.WXInitialize())
-input("wait for...")
-print(wxsdk.WXSendTextMsg("wxid_n11111", "This is a python sdk test msg"))
-```
+其他语言接口请看[文档](sdkmore.md)，目前已经发布`Python`，`Java`接口。
 
 ## TODO
 
