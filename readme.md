@@ -15,7 +15,7 @@
 4. 消息发送接口（`>=2.6.6.44`）
 5. 接受消息接口，3种消息（`>=2.6.7.40`)
 
-**`WeChatSDK`目前已经开放`C++`、`Python`、`Java`接口。** 具体请看[WeChatSDK开发指南](docs/sdk.md)。
+**`WeChatSDK`目前已经开放`C++`、`Python`、`Java`、`C#`接口。** 具体请看[WeChatSDK开发指南](docs/sdk.md)。
 
 更新详情请看[更新日志](update.md)
 
