@@ -51,20 +51,35 @@ extern "C"{
 /* interface WechatSDK */
 /* [implicit_handle][version][uuid] */ 
 
-int Initialize( void);
+int WSDKInitialize( void);
 
-int AntiRevokeMsg( void);
+int WSDKUninitialize( void);
 
-int UnAntiRevokeMsg( void);
+int WSDKAntiRevokeMsg( void);
 
-int StartSaveVoiceMsg( 
+int WSDKUnAntiRevokeMsg( void);
+
+int WSDKStartSaveVoiceMsg( 
     /* [string][in] */ wchar_t *path);
 
-int StopSaveVoiceMsg( void);
+int WSDKStopSaveVoiceMsg( void);
 
-int SendTextMsg( 
+int WSDKSendTextMsg( 
     /* [string][in] */ wchar_t *wxid,
     /* [string][in] */ wchar_t *msg);
+
+int WSDKSendImageMsg( 
+    /* [string][in] */ wchar_t *wxid,
+    /* [string][in] */ wchar_t *path);
+
+int WSDKRecvTextMsg( 
+    /* [in] */ unsigned int funptr);
+
+int WSDKRecvTransferMsg( 
+    /* [in] */ unsigned int funptr);
+
+int WSDKRecvPayMsg( 
+    /* [in] */ unsigned int funptr);
 
 
 extern handle_t WechatRs_IfHandle;

@@ -3,7 +3,7 @@
 
 ## Python
 
-发布`Python`版本的接口，具体使用见`src/WeChatSDKPy/sdk.py`。
+发布`Python`版本的接口，具体使用见`sdk/WeChatSDK.py`。
 
 ```
 //需管理员运行python
@@ -19,7 +19,7 @@ print(wxsdk.WXSendTextMsg("wxid_n11111", "This is a python sdk test msg"))
 
 ## Java
 
-发布`Java`版本的接口，具体使用见`src/WeChatSDKJava/WeChatSDK.java`和`TestJavaSDK.java`。
+发布`Java`版本的接口，具体使用见`sdk/WeChatSDK.java`和`TestJavaSDK.java`。
 
 由于`Java`接口使用了`jna`，所以需要下载[jna.jar](http://repo1.maven.org/maven2/net/java/dev/jna/jna/5.2.0/jna-5.2.0.jar)，具体编译方法请查找`Java`相关文章。
 
@@ -51,3 +51,55 @@ public class TestJavaSDK {
 }
 ```
 
+## C#
+
+发布`Java`版本的接口，具体使用见`sdk/WeChatSDK.cs`和`TestSDK.cs`。
+
+```
+//需管理员运行
+using static WeChatSDK.WeChatSDK;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+                uint pid = WXOpenWechat();
+                Console.WriteLine("WXOpenWechat pid:" + pid);
+
+                while (!WXIsWechatAlive(pid))
+                {
+                    Console.Write(".");
+                    Thread.Sleep(100);
+                }
+                Console.WriteLine("initialize sdk...");
+                Console.WriteLine(WXInitialize(pid));
+                while (!WXIsWechatSDKOk(pid))
+                {
+                    Console.Write(".");
+                    Thread.Sleep(100);
+                }
+                Console.WriteLine("sdk ok...");
+                WXAntiRevokeMsg(pid);
+                WXSaveVoiceMsg(pid, "c:\\wxmsg");
+
+                WXRecvPayMsg(pid, RecvPayMsg);
+
+                Console.ReadLine();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
+        }
+        static int RecvMoneyMsg(UInt32 pid, string wxid, string id, string msg)
+        {
+            Console.WriteLine(wxid + ":" + msg);
+            return 0;
+        }
+    }
+}
+```

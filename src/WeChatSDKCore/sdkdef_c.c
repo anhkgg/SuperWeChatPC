@@ -35,7 +35,7 @@
 #include "sdkdef_h.h"
 
 #define TYPE_FORMAT_STRING_SIZE   7                                 
-#define PROC_FORMAT_STRING_SIZE   199                               
+#define PROC_FORMAT_STRING_SIZE   379                               
 #define EXPR_FORMAT_STRING_SIZE   1                                 
 #define TRANSMIT_AS_TABLE_SIZE    0            
 #define WIRE_MARSHAL_TABLE_SIZE   0            
@@ -95,7 +95,7 @@ extern const MIDL_STUB_DESC WechatSDK_StubDesc;
 static RPC_BINDING_HANDLE WechatSDK__MIDL_AutoBindHandle;
 
 
-int Initialize( void)
+int WSDKInitialize( void)
 {
 
     CLIENT_CALL_RETURN _RetVal;
@@ -109,7 +109,7 @@ int Initialize( void)
 }
 
 
-int AntiRevokeMsg( void)
+int WSDKUninitialize( void)
 {
 
     CLIENT_CALL_RETURN _RetVal;
@@ -123,7 +123,7 @@ int AntiRevokeMsg( void)
 }
 
 
-int UnAntiRevokeMsg( void)
+int WSDKAntiRevokeMsg( void)
 {
 
     CLIENT_CALL_RETURN _RetVal;
@@ -137,8 +137,7 @@ int UnAntiRevokeMsg( void)
 }
 
 
-int StartSaveVoiceMsg( 
-    /* [string][in] */ wchar_t *path)
+int WSDKUnAntiRevokeMsg( void)
 {
 
     CLIENT_CALL_RETURN _RetVal;
@@ -146,27 +145,42 @@ int StartSaveVoiceMsg(
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&WechatSDK_StubDesc,
                   (PFORMAT_STRING) &sdkdef__MIDL_ProcFormatString.Format[90],
-                  ( unsigned char * )&path);
-    return ( int  )_RetVal.Simple;
-    
-}
-
-
-int StopSaveVoiceMsg( void)
-{
-
-    CLIENT_CALL_RETURN _RetVal;
-
-    _RetVal = NdrClientCall2(
-                  ( PMIDL_STUB_DESC  )&WechatSDK_StubDesc,
-                  (PFORMAT_STRING) &sdkdef__MIDL_ProcFormatString.Format[126],
                   ( unsigned char * )0);
     return ( int  )_RetVal.Simple;
     
 }
 
 
-int SendTextMsg( 
+int WSDKStartSaveVoiceMsg( 
+    /* [string][in] */ wchar_t *path)
+{
+
+    CLIENT_CALL_RETURN _RetVal;
+
+    _RetVal = NdrClientCall2(
+                  ( PMIDL_STUB_DESC  )&WechatSDK_StubDesc,
+                  (PFORMAT_STRING) &sdkdef__MIDL_ProcFormatString.Format[120],
+                  ( unsigned char * )&path);
+    return ( int  )_RetVal.Simple;
+    
+}
+
+
+int WSDKStopSaveVoiceMsg( void)
+{
+
+    CLIENT_CALL_RETURN _RetVal;
+
+    _RetVal = NdrClientCall2(
+                  ( PMIDL_STUB_DESC  )&WechatSDK_StubDesc,
+                  (PFORMAT_STRING) &sdkdef__MIDL_ProcFormatString.Format[156],
+                  ( unsigned char * )0);
+    return ( int  )_RetVal.Simple;
+    
+}
+
+
+int WSDKSendTextMsg( 
     /* [string][in] */ wchar_t *wxid,
     /* [string][in] */ wchar_t *msg)
 {
@@ -175,8 +189,69 @@ int SendTextMsg(
 
     _RetVal = NdrClientCall2(
                   ( PMIDL_STUB_DESC  )&WechatSDK_StubDesc,
-                  (PFORMAT_STRING) &sdkdef__MIDL_ProcFormatString.Format[156],
+                  (PFORMAT_STRING) &sdkdef__MIDL_ProcFormatString.Format[186],
                   ( unsigned char * )&wxid);
+    return ( int  )_RetVal.Simple;
+    
+}
+
+
+int WSDKSendImageMsg( 
+    /* [string][in] */ wchar_t *wxid,
+    /* [string][in] */ wchar_t *path)
+{
+
+    CLIENT_CALL_RETURN _RetVal;
+
+    _RetVal = NdrClientCall2(
+                  ( PMIDL_STUB_DESC  )&WechatSDK_StubDesc,
+                  (PFORMAT_STRING) &sdkdef__MIDL_ProcFormatString.Format[228],
+                  ( unsigned char * )&wxid);
+    return ( int  )_RetVal.Simple;
+    
+}
+
+
+int WSDKRecvTextMsg( 
+    /* [in] */ unsigned int funptr)
+{
+
+    CLIENT_CALL_RETURN _RetVal;
+
+    _RetVal = NdrClientCall2(
+                  ( PMIDL_STUB_DESC  )&WechatSDK_StubDesc,
+                  (PFORMAT_STRING) &sdkdef__MIDL_ProcFormatString.Format[270],
+                  ( unsigned char * )&funptr);
+    return ( int  )_RetVal.Simple;
+    
+}
+
+
+int WSDKRecvTransferMsg( 
+    /* [in] */ unsigned int funptr)
+{
+
+    CLIENT_CALL_RETURN _RetVal;
+
+    _RetVal = NdrClientCall2(
+                  ( PMIDL_STUB_DESC  )&WechatSDK_StubDesc,
+                  (PFORMAT_STRING) &sdkdef__MIDL_ProcFormatString.Format[306],
+                  ( unsigned char * )&funptr);
+    return ( int  )_RetVal.Simple;
+    
+}
+
+
+int WSDKRecvPayMsg( 
+    /* [in] */ unsigned int funptr)
+{
+
+    CLIENT_CALL_RETURN _RetVal;
+
+    _RetVal = NdrClientCall2(
+                  ( PMIDL_STUB_DESC  )&WechatSDK_StubDesc,
+                  (PFORMAT_STRING) &sdkdef__MIDL_ProcFormatString.Format[342],
+                  ( unsigned char * )&funptr);
     return ( int  )_RetVal.Simple;
     
 }
@@ -198,7 +273,7 @@ static const sdkdef_MIDL_PROC_FORMAT_STRING sdkdef__MIDL_ProcFormatString =
         0,
         {
 
-	/* Procedure Initialize */
+	/* Procedure WSDKInitialize */
 
 			0x32,		/* FC_BIND_PRIMITIVE */
 			0x48,		/* Old Flags:  */
@@ -222,7 +297,7 @@ static const sdkdef_MIDL_PROC_FORMAT_STRING sdkdef__MIDL_ProcFormatString =
 /* 28 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure AntiRevokeMsg */
+	/* Procedure WSDKUninitialize */
 
 /* 30 */	0x32,		/* FC_BIND_PRIMITIVE */
 			0x48,		/* Old Flags:  */
@@ -246,7 +321,7 @@ static const sdkdef_MIDL_PROC_FORMAT_STRING sdkdef__MIDL_ProcFormatString =
 /* 58 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure UnAntiRevokeMsg */
+	/* Procedure WSDKAntiRevokeMsg */
 
 /* 60 */	0x32,		/* FC_BIND_PRIMITIVE */
 			0x48,		/* Old Flags:  */
@@ -270,94 +345,247 @@ static const sdkdef_MIDL_PROC_FORMAT_STRING sdkdef__MIDL_ProcFormatString =
 /* 88 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure StartSaveVoiceMsg */
+	/* Procedure WSDKUnAntiRevokeMsg */
 
 /* 90 */	0x32,		/* FC_BIND_PRIMITIVE */
 			0x48,		/* Old Flags:  */
 /* 92 */	NdrFcLong( 0x0 ),	/* 0 */
 /* 96 */	NdrFcShort( 0x3 ),	/* 3 */
-/* 98 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 98 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 100 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 102 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 104 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
-			0x2,		/* 2 */
+/* 104 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+			0x1,		/* 1 */
 /* 106 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
 /* 108 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 110 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 112 */	NdrFcShort( 0x0 ),	/* 0 */
 
-	/* Parameter path */
-
-/* 114 */	NdrFcShort( 0x10b ),	/* Flags:  must size, must free, in, simple ref, */
-/* 116 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
-/* 118 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
-
 	/* Return value */
 
-/* 120 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 122 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 124 */	0x8,		/* FC_LONG */
+/* 114 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 116 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 118 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure StopSaveVoiceMsg */
+	/* Procedure WSDKStartSaveVoiceMsg */
 
-/* 126 */	0x32,		/* FC_BIND_PRIMITIVE */
+/* 120 */	0x32,		/* FC_BIND_PRIMITIVE */
 			0x48,		/* Old Flags:  */
-/* 128 */	NdrFcLong( 0x0 ),	/* 0 */
-/* 132 */	NdrFcShort( 0x4 ),	/* 4 */
-/* 134 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 136 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 138 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 140 */	0x44,		/* Oi2 Flags:  has return, has ext, */
-			0x1,		/* 1 */
-/* 142 */	0x8,		/* 8 */
+/* 122 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 126 */	NdrFcShort( 0x4 ),	/* 4 */
+/* 128 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 130 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 132 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 134 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+			0x2,		/* 2 */
+/* 136 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
-/* 144 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 146 */	NdrFcShort( 0x0 ),	/* 0 */
-/* 148 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 138 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 140 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 142 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter path */
+
+/* 144 */	NdrFcShort( 0x10b ),	/* Flags:  must size, must free, in, simple ref, */
+/* 146 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 148 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
 
 	/* Return value */
 
 /* 150 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 152 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 152 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 154 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
-	/* Procedure SendTextMsg */
+	/* Procedure WSDKStopSaveVoiceMsg */
 
 /* 156 */	0x32,		/* FC_BIND_PRIMITIVE */
 			0x48,		/* Old Flags:  */
 /* 158 */	NdrFcLong( 0x0 ),	/* 0 */
 /* 162 */	NdrFcShort( 0x5 ),	/* 5 */
-/* 164 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 164 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
 /* 166 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 168 */	NdrFcShort( 0x8 ),	/* 8 */
-/* 170 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
-			0x3,		/* 3 */
+/* 170 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+			0x1,		/* 1 */
 /* 172 */	0x8,		/* 8 */
 			0x1,		/* Ext Flags:  new corr desc, */
 /* 174 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 176 */	NdrFcShort( 0x0 ),	/* 0 */
 /* 178 */	NdrFcShort( 0x0 ),	/* 0 */
 
+	/* Return value */
+
+/* 180 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 182 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 184 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure WSDKSendTextMsg */
+
+/* 186 */	0x32,		/* FC_BIND_PRIMITIVE */
+			0x48,		/* Old Flags:  */
+/* 188 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 192 */	NdrFcShort( 0x6 ),	/* 6 */
+/* 194 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 196 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 198 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 200 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+			0x3,		/* 3 */
+/* 202 */	0x8,		/* 8 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 204 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 206 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 208 */	NdrFcShort( 0x0 ),	/* 0 */
+
 	/* Parameter wxid */
 
-/* 180 */	NdrFcShort( 0x10b ),	/* Flags:  must size, must free, in, simple ref, */
-/* 182 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
-/* 184 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
+/* 210 */	NdrFcShort( 0x10b ),	/* Flags:  must size, must free, in, simple ref, */
+/* 212 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 214 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
 
 	/* Parameter msg */
 
-/* 186 */	NdrFcShort( 0x10b ),	/* Flags:  must size, must free, in, simple ref, */
-/* 188 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
-/* 190 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
+/* 216 */	NdrFcShort( 0x10b ),	/* Flags:  must size, must free, in, simple ref, */
+/* 218 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 220 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
 
 	/* Return value */
 
-/* 192 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
-/* 194 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
-/* 196 */	0x8,		/* FC_LONG */
+/* 222 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 224 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 226 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure WSDKSendImageMsg */
+
+/* 228 */	0x32,		/* FC_BIND_PRIMITIVE */
+			0x48,		/* Old Flags:  */
+/* 230 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 234 */	NdrFcShort( 0x7 ),	/* 7 */
+/* 236 */	NdrFcShort( 0xc ),	/* x86 Stack size/offset = 12 */
+/* 238 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 240 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 242 */	0x46,		/* Oi2 Flags:  clt must size, has return, has ext, */
+			0x3,		/* 3 */
+/* 244 */	0x8,		/* 8 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 246 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 248 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 250 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter wxid */
+
+/* 252 */	NdrFcShort( 0x10b ),	/* Flags:  must size, must free, in, simple ref, */
+/* 254 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 256 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
+
+	/* Parameter path */
+
+/* 258 */	NdrFcShort( 0x10b ),	/* Flags:  must size, must free, in, simple ref, */
+/* 260 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 262 */	NdrFcShort( 0x4 ),	/* Type Offset=4 */
+
+	/* Return value */
+
+/* 264 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 266 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 268 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure WSDKRecvTextMsg */
+
+/* 270 */	0x32,		/* FC_BIND_PRIMITIVE */
+			0x48,		/* Old Flags:  */
+/* 272 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 276 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 278 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 280 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 282 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 284 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+			0x2,		/* 2 */
+/* 286 */	0x8,		/* 8 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 288 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 290 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 292 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter funptr */
+
+/* 294 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 296 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 298 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Return value */
+
+/* 300 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 302 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 304 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure WSDKRecvTransferMsg */
+
+/* 306 */	0x32,		/* FC_BIND_PRIMITIVE */
+			0x48,		/* Old Flags:  */
+/* 308 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 312 */	NdrFcShort( 0x9 ),	/* 9 */
+/* 314 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 316 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 318 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 320 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+			0x2,		/* 2 */
+/* 322 */	0x8,		/* 8 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 324 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 326 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 328 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter funptr */
+
+/* 330 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 332 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 334 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Return value */
+
+/* 336 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 338 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 340 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Procedure WSDKRecvPayMsg */
+
+/* 342 */	0x32,		/* FC_BIND_PRIMITIVE */
+			0x48,		/* Old Flags:  */
+/* 344 */	NdrFcLong( 0x0 ),	/* 0 */
+/* 348 */	NdrFcShort( 0xa ),	/* 10 */
+/* 350 */	NdrFcShort( 0x8 ),	/* x86 Stack size/offset = 8 */
+/* 352 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 354 */	NdrFcShort( 0x8 ),	/* 8 */
+/* 356 */	0x44,		/* Oi2 Flags:  has return, has ext, */
+			0x2,		/* 2 */
+/* 358 */	0x8,		/* 8 */
+			0x1,		/* Ext Flags:  new corr desc, */
+/* 360 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 362 */	NdrFcShort( 0x0 ),	/* 0 */
+/* 364 */	NdrFcShort( 0x0 ),	/* 0 */
+
+	/* Parameter funptr */
+
+/* 366 */	NdrFcShort( 0x48 ),	/* Flags:  in, base type, */
+/* 368 */	NdrFcShort( 0x0 ),	/* x86 Stack size/offset = 0 */
+/* 370 */	0x8,		/* FC_LONG */
+			0x0,		/* 0 */
+
+	/* Return value */
+
+/* 372 */	NdrFcShort( 0x70 ),	/* Flags:  out, return, base type, */
+/* 374 */	NdrFcShort( 0x4 ),	/* x86 Stack size/offset = 4 */
+/* 376 */	0x8,		/* FC_LONG */
 			0x0,		/* 0 */
 
 			0x0
@@ -385,8 +613,13 @@ static const unsigned short WechatSDK_FormatStringOffsetTable[] =
     30,
     60,
     90,
-    126,
-    156
+    120,
+    156,
+    186,
+    228,
+    270,
+    306,
+    342
     };
 
 

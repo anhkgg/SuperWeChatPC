@@ -10,3 +10,5 @@ bool InjectDll(const WCHAR* path, const WCHAR* dllpath);
 //pid: process id
 //dllpath: dll full path
 bool InjectDll1(DWORD pid, const WCHAR* dllpath);
+//
+bool EnjectDll(DWORD pid, const WCHAR* dllname);

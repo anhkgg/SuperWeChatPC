@@ -118,11 +118,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;WECHATRESOURCE_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -155,12 +156,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\common\rpc.h" />
+    <ClInclude Include="..\common\rpcdef.h" />
     <ClInclude Include="..\common\sdkinf.h" />
     <ClInclude Include="common.h" />
     <ClInclude Include="config.h" />
     <ClInclude Include="dllhijack.h" />
     <ClInclude Include="hook.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="rpcutil.h" />
+    <ClInclude Include="sdk.h" />
+    <ClInclude Include="sdkclk_h.h" />
+    <ClInclude Include="sdkdef_h.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="util.h" />
@@ -169,6 +176,9 @@
     <ClInclude Include="weixin.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\rpc.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="config.cpp" />
     <ClCompile Include="dllhijack.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
@@ -176,7 +186,18 @@
     </ClCompile>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="hook.cpp" />
+    <ClCompile Include="recvmsg.cpp" />
+    <ClCompile Include="rpcutil.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="sdk.cpp" />
+    <ClCompile Include="sdkclk.cpp" />
+    <ClCompile Include="sdkclk_c.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="sdkdef_s.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="sendmsg.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -184,6 +205,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="user.cpp" />
     <ClCompile Include="util.cpp" />
     <ClCompile Include="voice.cpp" />
     <ClCompile Include="revoke.cpp" />
@@ -198,6 +220,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="def.def" />
+    <None Include="sdkclk.acf" />
+    <None Include="sdkdef.acf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="sdkclk.idl" />
+    <Midl Include="sdkdef.idl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

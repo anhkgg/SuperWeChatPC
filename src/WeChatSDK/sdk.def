@@ -1,5 +1,6 @@
 EXPORTS
 	WXOpenWechat
+	WXGetWechat
 	WXIsWechatAlive
 	WXInitialize
 	WXUninitialize
@@ -9,3 +10,7 @@ EXPORTS
 	WXSaveVoiceMsg
 	WXUnSaveVoiceMsg
 	WXSendTextMsg
+	;WXSendImageMsg
+	WXRecvTextMsg
+	WXRecvTransferMsg
+	WXRecvPayMsg

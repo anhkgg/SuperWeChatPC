@@ -103,7 +103,8 @@
       <ModuleDefinitionFile>sdk.def</ModuleDefinitionFile>
     </Link>
     <PostBuildEvent>
-      <Command>copy "$(OutDir)$(TargetName)$(TargetExt)" "../../sdk/$(TargetName)$(TargetExt)"</Command>
+      <Command>copy "$(OutDir)$(TargetName)$(TargetExt)" "../../sdk/$(TargetName)$(TargetExt)"
+copy "sdk.h" "../../sdk/sdk.h"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -153,17 +154,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\common\rpc.h" />
+    <ClInclude Include="..\common\rpcdef.h" />
     <ClInclude Include="..\common\version.h" />
+    <ClInclude Include="..\WeChatSDKCore\sdkclk_h.h" />
+    <ClInclude Include="..\WeChatSDKCore\sdkdef_h.h" />
     <ClInclude Include="openwechat.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="rpcutil.h" />
     <ClInclude Include="sdk.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\common\rpc.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\WeChatSDKCore\sdkclk_s.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\WeChatSDKCore\sdkdef_c.c">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="openwechat.cpp" />
+    <ClCompile Include="rpcutil.cpp" />
     <ClCompile Include="sdk.cpp" />
+    <ClCompile Include="sdkclk.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

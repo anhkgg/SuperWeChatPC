@@ -1,0 +1,8 @@
+[
+    implicit_handle (handle_t WechatRsClk_IfHandle)
+]
+
+interface WechatSDKClk
+{
+    
+}

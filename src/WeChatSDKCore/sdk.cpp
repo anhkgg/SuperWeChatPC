@@ -2,21 +2,19 @@
 #include "sdk.h"
 #include "weixin.h"
 
-#include "../common/sdkinf.h"
+//#include "../common/sdkinf.h"
 //https ://blog.csdn.net/xxxluozhen/article/details/5605818 
-#pragma comment(lib, "..\\WeChatSDKCore\\Release\\WeChatRs.lib")
+//#pragma comment(lib, "..\\WeChatSDKCore\\Release\\WeChatRs.lib")
+//#include "../../common/sdkinf.h"
+#include "sdkdef_h.h"
+#include "rpcutil.h"
 
 //TODO: edit the file to add interface
 
-int GetSDKInterface(PWechatSDKInterface p);
-int StartSDKServer(DWORD pid, PWechatSDKInterface p);
-void StopSDKServer();
 
 void RpcLoop()
 {
-    WechatSDKInterface p = { 0 };
-    GetSDKInterface(&p);
-    StartSDKServer(GetCurrentProcessId(), &p);
+    StartSDKServer(GetCurrentProcessId());
     OutputDebugString(L"exit...rpc");
 }
 
@@ -31,57 +29,77 @@ void UnInitSDK()
     StopSDKServer();
 }
 
-int Initialize(void)
+//sdkdef.idl
+
+int WSDKInitialize(void)
 {
     OutputDebugString(L"sdk::Initialize");
     return 0;
 }
 
-int AntiRevokeMsg(void)
+int WSDKUninitialize()
 {
-    OutputDebugString(L"sdk::AntiRevokeMsg");
-    return FakeRevokeMsg();
-}
-
-int UnAntiRevokeMsg(void)
-{
-    OutputDebugString(L"sdk::UnAntiRevokeMsg");
-    RestoreRevokeMsg();
+    OutputDebugString(L"sdk::Uninitialize");
+    //TODO: uninit
     return 0;
 }
 
-int StartSaveVoiceMsg(
+int WSDKAntiRevokeMsg(void)
+{
+    OutputDebugString(L"sdk::AntiRevokeMsg");
+    return CoreFakeRevokeMsg();
+}
+
+int WSDKUnAntiRevokeMsg(void)
+{
+    OutputDebugString(L"sdk::UnAntiRevokeMsg");
+    CoreRestoreRevokeMsg();
+    return 0;
+}
+
+int WSDKStartSaveVoiceMsg(
     /* [string][in] */ wchar_t *path)
 {
     OutputDebugString(L"sdk::StartSaveVoiceMsg");
-    return SaveVoiceMsg(path);
+    return CoreSaveVoiceMsg(path);
 }
 
-int StopSaveVoiceMsg(void)
+int WSDKStopSaveVoiceMsg(void)
 {
     OutputDebugString(L"sdk::StopSaveVoiceMsg");
-    return UnSaveVoiceMsg();
+    return CoreUnSaveVoiceMsg();
 }
 
-int SendTextMsg(
+int WSDKSendTextMsg(
     /* [string][in] */ wchar_t *wxid,
     /* [string][in] */ wchar_t *msg)
 {
     OutputDebugString(L"sdk::SendTextMsg");
-    return SendTxtMsg(wxid, msg);
+    return CoreSendTxtMsg(wxid, msg);
 }
 
-//put the function pointer to WeChatRs.dll
-int GetSDKInterface(PWechatSDKInterface p)
+int  WSDKSendImageMsg(
+    /* [string][in] */ wchar_t *wxid,
+    /* [string][in] */ wchar_t *path)
 {
-    if (p) {
-        p->Initialize = Initialize;
-        p->AntiRevokeMsg = AntiRevokeMsg;
-        p->UnAntiRevokeMsg = UnAntiRevokeMsg;
-        p->StartSaveVoiceMsg = StartSaveVoiceMsg;
-        p->StopSaveVoiceMsg = StopSaveVoiceMsg;
-        p->SendTextMsg = SendTextMsg;
-    }
+    OutputDebugString(L"sdk::SendImageMsg");
+    return CoreSendImageMsg(wxid, path);
+}
 
-    return 0;
+int WSDKRecvTextMsg(unsigned int funptr)
+{
+    OutputDebugString(L"sdk::RecvTextMsg");
+    return CoreRecvTextMsg(funptr);
+}
+
+int WSDKRecvTransferMsg(unsigned int funptr)
+{
+    OutputDebugString(L"sdk::RecvTransferMsg");
+    return CoreRecvTransferMsg(funptr);
+}
+
+int WSDKRecvPayMsg(unsigned int funptr)
+{
+    OutputDebugString(L"sdk::RecvPayMsg");
+    return CoreRecvPayMsg(funptr);
 }

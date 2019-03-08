@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatCore", "WeChatResource.vcxproj", "{CC8544D5-1A6E-4515-B737-4DA205371032}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatSDKCore", "WeChatResource.vcxproj", "{CC8544D5-1A6E-4515-B737-4DA205371032}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatSDK", "..\WeChatSDK\WeChatSDK.vcxproj", "{3863B180-E079-4735-ABF7-13552EE0C3F1}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatSDKTest", "..\WeChatSDKTest\WeChatSDKTest.vcxproj", "{00EC6E77-8926-4860-A73F-3E5DBBE6221B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatRc", "..\WeChatRc\WeChatRc.vcxproj", "{FF7BD19B-CD33-4EEB-98A3-0E25743D3333}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatRs", "..\WeChatRs\WeChatRs.vcxproj", "{F980CB45-B702-44D4-976E-F32FCB35D085}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "inject", "..\inject\inject.vcxproj", "{F1DD9E37-B005-40EA-9A61-C952F08A35E9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,22 +43,14 @@ Global
 		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Release|x64.Build.0 = Release|x64
 		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Release|x86.ActiveCfg = Release|Win32
 		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Release|x86.Build.0 = Release|Win32
-		{FF7BD19B-CD33-4EEB-98A3-0E25743D3333}.Debug|x64.ActiveCfg = Debug|x64
-		{FF7BD19B-CD33-4EEB-98A3-0E25743D3333}.Debug|x64.Build.0 = Debug|x64
-		{FF7BD19B-CD33-4EEB-98A3-0E25743D3333}.Debug|x86.ActiveCfg = Debug|Win32
-		{FF7BD19B-CD33-4EEB-98A3-0E25743D3333}.Debug|x86.Build.0 = Debug|Win32
-		{FF7BD19B-CD33-4EEB-98A3-0E25743D3333}.Release|x64.ActiveCfg = Release|x64
-		{FF7BD19B-CD33-4EEB-98A3-0E25743D3333}.Release|x64.Build.0 = Release|x64
-		{FF7BD19B-CD33-4EEB-98A3-0E25743D3333}.Release|x86.ActiveCfg = Release|Win32
-		{FF7BD19B-CD33-4EEB-98A3-0E25743D3333}.Release|x86.Build.0 = Release|Win32
-		{F980CB45-B702-44D4-976E-F32FCB35D085}.Debug|x64.ActiveCfg = Debug|x64
-		{F980CB45-B702-44D4-976E-F32FCB35D085}.Debug|x64.Build.0 = Debug|x64
-		{F980CB45-B702-44D4-976E-F32FCB35D085}.Debug|x86.ActiveCfg = Debug|Win32
-		{F980CB45-B702-44D4-976E-F32FCB35D085}.Debug|x86.Build.0 = Debug|Win32
-		{F980CB45-B702-44D4-976E-F32FCB35D085}.Release|x64.ActiveCfg = Release|x64
-		{F980CB45-B702-44D4-976E-F32FCB35D085}.Release|x64.Build.0 = Release|x64
-		{F980CB45-B702-44D4-976E-F32FCB35D085}.Release|x86.ActiveCfg = Release|Win32
-		{F980CB45-B702-44D4-976E-F32FCB35D085}.Release|x86.Build.0 = Release|Win32
+		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Debug|x64.ActiveCfg = Debug|x64
+		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Debug|x64.Build.0 = Debug|x64
+		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Debug|x86.ActiveCfg = Debug|Win32
+		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Debug|x86.Build.0 = Debug|Win32
+		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Release|x64.ActiveCfg = Release|x64
+		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Release|x64.Build.0 = Release|x64
+		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Release|x86.ActiveCfg = Release|Win32
+		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

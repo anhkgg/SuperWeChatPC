@@ -6,24 +6,44 @@
 #include "sdk.h"
 #include "inject.h"
 
-#include "../common/sdkinf.h"
-#pragma comment(lib, "..\\WeChatSDKCore\\Release\\WeChatRc.lib")
+//#include "../common/sdkinf.h"
+#include "../WeChatSDKCore/sdkdef_h.h"
+#include "rpcutil.h"
+
+//#pragma comment(lib, "..\\WeChatSDKCore\\Release\\WeChatRc.lib")
 #pragma comment(lib, "inject.lib")
 
+#define WECHAREXE L"WeChat.exe"
 #define WECHATWINDLL L"WeChatWin.dll"
 #define WECHATSDKDLL L"WeChatSDK.dll"
 #define WECHATINJECTDLL L"WeChatSDKCore.dll"
 
 //TODO: edit the file to add interface
 
-//int ConnectSDKServer0(DWORD pid);
-//int DisconnectSDKServer0(DWORD pid);
+bool g_IsSDKInited = false;
 
-int ConnectSDKServer(DWORD pid, RPC_WSTR* StringBinding);
-int DisconnectSDKServer(DWORD pid, RPC_WSTR* StringBinding);
-int GetSDKInterface(PWechatSDKInterface p);
 
-WechatSDKInterface g_SDKInf = { 0 };
+void RpcLoop()
+{
+    OutputDebugString(L"start wechatsdk rpc");
+    StartSDKClkServer();
+    OutputDebugString(L"exit..wechatsdk.rpc");
+}
+
+int InitSDK()
+{
+    CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)RpcLoop, NULL, 0, NULL);
+    return ERROR_SUCCESS;
+}
+
+void UninitSDK()
+{
+    if (g_IsSDKInited) {
+        g_IsSDKInited = false;
+        StopSDKClkServer();
+    }
+}
+
 
 int WXOpenWechat()
 {
@@ -33,6 +53,28 @@ int WXOpenWechat()
     ret = OpenWeChat(&pid);
 
     return pid;
+}
+
+int WXGetWechat(const wchar_t* wxid)
+{
+    int ret = 0;
+    PROCESSENTRY32 pe32 = { sizeof(pe32) };
+
+    HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
+    if (hSnap == INVALID_HANDLE_VALUE) {
+        return 0;
+    }
+
+    if (Process32First(hSnap, &pe32)) {
+        do {
+            if (!_wcsnicmp(pe32.szExeFile, WECHAREXE, wcslen(WECHAREXE))) {
+                ret = pe32.th32ProcessID;
+                //TODO: //WXGetSelfWxid();
+                break;
+            }
+        } while (Process32Next(hSnap, &pe32));
+    }
+    return ret;
 }
 
 bool WXIsWechatAlive(DWORD pid)
@@ -56,6 +98,8 @@ bool WXIsWechatAlive(DWORD pid)
     return ret;
 }
 
+//for sdk interface
+
 int WXInitialize(DWORD pid)
 {
     WCHAR DllPath[MAX_PATH] = { 0 };
@@ -76,8 +120,12 @@ int WXInitialize(DWORD pid)
         return -1;
     }
 
-    if (g_SDKInf.Initialize == NULL) {
-        GetSDKInterface(&g_SDKInf);
+    //WSDKInitialize(); //rpc还未启动
+
+    if (!g_IsSDKInited) {
+        if (InitSDK() == ERROR_SUCCESS) {
+            g_IsSDKInited = true;
+        }
     }
 
     return ERROR_SUCCESS;
@@ -85,8 +133,29 @@ int WXInitialize(DWORD pid)
 
 int WXUninitialize(DWORD pid)
 {
+    UninitSDK();
     //EnjectDll
-    return 0;
+    RPC_WSTR StringBinding = NULL;
+    int ret = ConnectSDKServer(pid, &StringBinding);
+    if (ret == ERROR_SUCCESS) {
+        RpcTryExcept
+        {
+            ret = WSDKUninitialize();
+        }
+            RpcExcept(1)
+        {
+            //printf("RPC Exception %d/n", RpcExceptionCode());
+            return false;
+        }
+        RpcEndExcept
+
+        DisconnectSDKServer(pid, &StringBinding);
+        
+        EnjectDll(pid, WECHATINJECTDLL);
+
+        return ERROR_SUCCESS;
+    }
+    return -1;
 }
 
 bool WXIsWechatSDKOk(DWORD pid)
@@ -96,7 +165,7 @@ bool WXIsWechatSDKOk(DWORD pid)
     if (ret == ERROR_SUCCESS) {
         RpcTryExcept
         {
-            ret = g_SDKInf.Initialize();
+            ret = WSDKInitialize();
         }
             RpcExcept(1)
         {
@@ -119,7 +188,7 @@ int WXAntiRevokeMsg(DWORD pid)
         // 下面是调用服务端的函数了
         RpcTryExcept
         {
-            ret = g_SDKInf.AntiRevokeMsg();
+            ret = WSDKAntiRevokeMsg();
         }
             RpcExcept(1)
         {
@@ -140,7 +209,7 @@ int WXUnAntiRevokeMsg(DWORD pid)
         // 下面是调用服务端的函数了
         RpcTryExcept
         {
-            ret = g_SDKInf.UnAntiRevokeMsg();
+            ret = WSDKUnAntiRevokeMsg();
         }
             RpcExcept(1)
         {
@@ -161,7 +230,7 @@ int WXSaveVoiceMsg(DWORD pid, const wchar_t* path)
         // 下面是调用服务端的函数了
         RpcTryExcept
         {
-            ret = g_SDKInf.StartSaveVoiceMsg((wchar_t *)path);
+            ret = WSDKStartSaveVoiceMsg((wchar_t *)path);
         }
             RpcExcept(1)
         {
@@ -181,7 +250,7 @@ int WXUnSaveVoiceMsg(DWORD pid)
         // 下面是调用服务端的函数了
         RpcTryExcept
         {
-            ret = g_SDKInf.StopSaveVoiceMsg();
+            ret = WSDKStopSaveVoiceMsg();
         }
             RpcExcept(1)
         {
@@ -202,7 +271,7 @@ int WXSendTextMsg(DWORD pid, const wchar_t* wxid, const wchar_t* msg)
         // 下面是调用服务端的函数了
         RpcTryExcept
         {
-            ret = g_SDKInf.SendTextMsg((wchar_t*)wxid, (wchar_t*)msg);
+            ret = WSDKSendTextMsg((wchar_t*)wxid, (wchar_t*)msg);
         }
             RpcExcept(1)
         {
@@ -211,6 +280,90 @@ int WXSendTextMsg(DWORD pid, const wchar_t* wxid, const wchar_t* msg)
         RpcEndExcept
 
         DisconnectSDKServer(pid, &StringBinding);
+    }
+    return ret;
+}
+
+int WXSendImageMsg(DWORD pid, const wchar_t* wxid, const wchar_t* path)
+{
+    RPC_WSTR StringBinding = NULL;
+    int ret = ConnectSDKServer(pid, &StringBinding);
+    if (ret == 0) {
+        // 下面是调用服务端的函数了
+        RpcTryExcept
+        {
+            ret = WSDKSendImageMsg((wchar_t*)wxid, (wchar_t*)path);
+        }
+            RpcExcept(1)
+        {
+            printf("RPC Exception %d/n", RpcExceptionCode());
+        }
+        RpcEndExcept
+
+            DisconnectSDKServer(pid, &StringBinding);
+    }
+    return ret;
+}
+
+int WXRecvTextMsg(DWORD pid, PFNRECVTEXTMSG_CALLBACK funptr)
+{
+    RPC_WSTR StringBinding = NULL;
+    int ret = ConnectSDKServer(pid, &StringBinding);
+    if (ret == 0) {
+        // 下面是调用服务端的函数了
+        RpcTryExcept
+        {
+            ret = WSDKRecvTextMsg((unsigned int)funptr);
+        }
+            RpcExcept(1)
+        {
+            printf("RPC Exception %d/n", RpcExceptionCode());
+        }
+        RpcEndExcept
+
+            DisconnectSDKServer(pid, &StringBinding);
+    }
+    return ret;
+}
+
+int WXRecvTransferMsg(DWORD pid, PFNRECVMONEYMSG_CALLBACK funptr)
+{
+    RPC_WSTR StringBinding = NULL;
+    int ret = ConnectSDKServer(pid, &StringBinding);
+    if (ret == 0) {
+        // 下面是调用服务端的函数了
+        RpcTryExcept
+        {
+            ret = WSDKRecvTransferMsg((unsigned int)funptr);
+        }
+            RpcExcept(1)
+        {
+            printf("RPC Exception %d/n", RpcExceptionCode());
+        }
+        RpcEndExcept
+
+            DisconnectSDKServer(pid, &StringBinding);
+    }
+    return ret;
+}
+
+int WXRecvPayMsg(DWORD pid, PFNRECVMONEYMSG_CALLBACK funptr)
+{
+    RPC_WSTR StringBinding = NULL;
+    int ret = ConnectSDKServer(pid, &StringBinding);
+    if (ret == 0) {
+        // 下面是调用服务端的函数了
+        RpcTryExcept
+        {
+            ret = WSDKRecvPayMsg((unsigned int)funptr);
+        }
+            RpcExcept(1)
+        {
+            printf("RPC Exception %d/n", RpcExceptionCode());
+        }
+        RpcEndExcept
+
+            DisconnectSDKServer(pid, &StringBinding);
     }
     return ret;
 }

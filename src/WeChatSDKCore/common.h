@@ -29,3 +29,5 @@ bool IsSupportedWxVersion(
     DWORD* orig_code_count = NULL,
     BYTE* fake_code = NULL,
     DWORD* fake_code_count = NULL);
+
+int HookTemplate(HMODULE hMod, const SuppWxCfg* OffArray, int len, PVOID* orig, PVOID fake);

@@ -1,0 +1,19 @@
+[
+    uuid(EC3A7CE8-8F99-47ef-9705-DA5DF14F9A4C),
+    version(1.0)
+]
+
+interface WechatSDK
+{
+    int WSDKInitialize();
+    int WSDKUninitialize();
+    int WSDKAntiRevokeMsg();
+    int WSDKUnAntiRevokeMsg();
+    int WSDKStartSaveVoiceMsg([in, string]wchar_t* path);
+    int WSDKStopSaveVoiceMsg();
+    int WSDKSendTextMsg([in, string]wchar_t* wxid, [in, string]wchar_t* msg);
+    int WSDKSendImageMsg([in, string]wchar_t* wxid, [in, string]wchar_t* path);
+    int WSDKRecvTextMsg([in]unsigned int funptr);
+    int WSDKRecvTransferMsg([in]unsigned int funptr);
+    int WSDKRecvPayMsg([in]unsigned int funptr);
+}

@@ -102,7 +102,7 @@ int InitFunction()
     return ERROR_SUCCESS;
 }
 
-int SendTxtMsg(WCHAR* wxid, WCHAR* msg)
+int CoreSendTxtMsg(WCHAR* wxid, WCHAR* msg)
 {
     int ret = InitFunction();
     if (ret != ERROR_SUCCESS) {
@@ -125,14 +125,15 @@ int SendTxtMsg(WCHAR* wxid, WCHAR* msg)
     return ret;
 }
 
-int SendImageMsg(WCHAR* wxid, WCHAR* path)
+//к╫сп
+int CoreSendImageMsg(WCHAR* wxid, WCHAR* path)
 {
     int ret = InitFunction();
     if (ret != ERROR_SUCCESS) {
         return ret;
     }
 
-    wxstring pimage;
+    /*wxstring pimage;
     wxstring pwxid;
     char msgpack[0x1000] = { 0 };
 
@@ -149,5 +150,7 @@ int SendImageMsg(WCHAR* wxid, WCHAR* path)
     {
         __asm mov ecx, p;
         pfn_WxSendMsgMgr_SendImageMsg(msgpack, &pwxid, &pimage);
-    }
+    }*/
+
+    return ret;
 }

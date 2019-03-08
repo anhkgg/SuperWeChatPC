@@ -4,7 +4,7 @@
 #include <windows.h>
 
 #define VER_Major           1
-#define VER_Minor           2
+#define VER_Minor           3
 #define VER_Revision        0
 #define VER_Build           0
 

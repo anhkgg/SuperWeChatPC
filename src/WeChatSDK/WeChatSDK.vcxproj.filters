@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="rpc">
+      <UniqueIdentifier>{f2c8e71e-ece9-4410-a55b-b86768c50a6b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -33,6 +36,21 @@
     <ClInclude Include="..\common\version.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\WeChatSDKCore\sdkclk_h.h">
+      <Filter>rpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\WeChatSDKCore\sdkdef_h.h">
+      <Filter>rpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\rpc.h">
+      <Filter>rpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\rpcdef.h">
+      <Filter>rpc</Filter>
+    </ClInclude>
+    <ClInclude Include="rpcutil.h">
+      <Filter>rpc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -45,6 +63,21 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="openwechat.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\WeChatSDKCore\sdkclk_s.c">
+      <Filter>rpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\WeChatSDKCore\sdkdef_c.c">
+      <Filter>rpc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\rpc.cpp">
+      <Filter>rpc</Filter>
+    </ClCompile>
+    <ClCompile Include="rpcutil.cpp">
+      <Filter>rpc</Filter>
+    </ClCompile>
+    <ClCompile Include="sdkclk.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

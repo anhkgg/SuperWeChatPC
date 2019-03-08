@@ -8,23 +8,24 @@
 
 `WeChatSDK.dll`内部通过`RPC`通信和注入到微信进程的`WeChatSDKCore.dll`进行功能调用，支持多开微信功能的调用，微信间互不影响。
 
+在新版本（`1.3.0`）中，`WeChatRs`、`WeChatRc`是虚拟模块，代码何如到`WeChatSDKCore`和`WeChatSDK`中，并且实现了RPC双向通信，用于支持`WeChatSDK`设置回调。
+
 ## WeChatSDK使用
 
 复制`WeChatSDK`目录中的`sdk.h`、`WeChatSDK.dll`以及`WeChatSDK.lib`（或者显示调用接口）到自己项目中，然后调用`sdk.h`中的接口定义进行代码开发即可。
 
-发布时需要把所有模块都同时发布出去，包括`WeChatSDK.dll`，`WeChatSDKCore.dll`，`WeChatRs.dll`，`WeChatRc.dll`。
+发布时需要把所有模块都同时发布出去，包括`WeChatSDK.dll`，`WeChatSDKCore.dll`（**新版已经将另外两个模块合并**）。
+~~发布时需要把所有模块都同时发布出去，包括`WeChatSDK.dll`，`WeChatSDKCore.dll`，`WeChatRs.dll`，`WeChatRc.dll`。~~
 
 **源码目录介绍**
 
 ```
 bin             //老版本
 docs            //文档
-sdk             //vs2017 x86编译完成的sdk模块
+sdk             //vs2017 x86编译完成的sdk模块，其他语言的sdk
 src 
  |- common          //公共目录
  |- WeChatSDK       //WeChatSDK.dll
- |- WeChatRc        //WeChatRs.dll
- |- WeChatRs        //WeChatRc.dll
  |- WeChatSDKCore   //WeChatSDKCore.dll
  |- WeChatSDKTest   //SDK示例，普通用户多开工具
 ```
@@ -32,7 +33,7 @@ src
 编译顺序(vs2017 x86)：
 
 ```
-WeChatRs -> WeChatRc -> WeChatSDK -> WeChatSDKCore
+WeChatSDKCore -> WeChatSDK
 ```
 
 ## WeChatSDK接口
@@ -54,7 +55,7 @@ bool WXIsWechatSDKOk(DWORD pid);
 检查初始化WeChatSDK是否成功。在检查到成功之后才能调用其他接口，否则SDK无法正常工作。pid是WXOpenWechat返回值。返回true表示成功。
 
 int WXAntiRevokeMsg(DWORD pid);
-开启防消息撤销功能。pid是WXOpenWechat返回值。返回0表示成功。
+开启防消息撤销功能。pid是WXOpenWechat返回值。返回0表示成功。在1.3.0版本中更换实现方式，增加撤销提示，防止出现某些不可预见情况。
 
 int WXUnAntiRevokeMsg(DWORD pid);
 关闭防消息撤销功能。pid是WXOpenWechat返回值。返回0表示成功。
@@ -68,6 +69,17 @@ int WXUnSaveVoiceMsg(DWORD pid);
 int WXSendTextMsg(DWORD pid, const wchar_t* wxid, const wchar_t* msg);
 发送文字消息接口，支持表情[x]。pid是WXOpenWechat返回值，wxid指定要发送对象的wxid，msg指定要发送内容。返回0表示成功。后续会提供通过微信名或昵称获取wxid接口。
 
+int WXGetWechat(const wchar_t* wxid);
+通过wxid找到已经打开的微信的pid，实现不完整，不建议使用。
+
+typedef int(*PFNRECVTEXTMSG_CALLBACK)(int pid, wchar_t* wxid, wchar_t* msg);
+int WXRecvTextMsg(DWORD pid, PFNRECVTEXTMSG_CALLBACK funptr);
+设置接受文字消息的回调函数，在回调函数中自行处理消息。pid是WXOpenWechat返回值，funptr是回调函数，PFNRECVTEXTMSG_CALLBACK是回调接口声明。
+
+int WXRecvTransferMsg(DWORD pid, PFNRECVMONEYMSG_CALLBACK funptr);
+int WXRecvPayMsg(DWORD pid, PFNRECVMONEYMSG_CALLBACK funptr);
+设置支付相关回调接口。
+
 //void WXSendGroupTextMsg(); //暂不支持
 //void WXSendImageMsg(); //暂不支持
 //void WXSendVoiceMsg(); //暂不支持
@@ -80,7 +92,7 @@ int WXSendTextMsg(DWORD pid, const wchar_t* wxid, const wchar_t* msg);
 
 详细请参考`WeChatSDKTest`使用方法。
 
-其他语言接口请看[文档](sdkmore.md)，目前已经发布`Python`，`Java`接口。
+其他语言接口请看[文档](sdkmore.md)，目前已经发布`Python`，`Java`, `C#`接口。
 
 ## TODO
 

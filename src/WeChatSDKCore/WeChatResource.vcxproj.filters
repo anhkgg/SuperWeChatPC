@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="rpc">
+      <UniqueIdentifier>{83ef953c-a900-4334-80a8-f68db0740031}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -51,6 +54,24 @@
     <ClInclude Include="weixin.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="..\common\rpc.h">
+      <Filter>rpc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\common\rpcdef.h">
+      <Filter>rpc</Filter>
+    </ClInclude>
+    <ClInclude Include="sdk.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="rpcutil.h">
+      <Filter>rpc</Filter>
+    </ClInclude>
+    <ClInclude Include="sdkclk_h.h">
+      <Filter>rpc</Filter>
+    </ClInclude>
+    <ClInclude Include="sdkdef_h.h">
+      <Filter>rpc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -86,6 +107,27 @@
     <ClCompile Include="revoke.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="recvmsg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="..\common\rpc.cpp">
+      <Filter>rpc</Filter>
+    </ClCompile>
+    <ClCompile Include="rpcutil.cpp">
+      <Filter>rpc</Filter>
+    </ClCompile>
+    <ClCompile Include="sdkclk_c.c">
+      <Filter>rpc</Filter>
+    </ClCompile>
+    <ClCompile Include="sdkdef_s.c">
+      <Filter>rpc</Filter>
+    </ClCompile>
+    <ClCompile Include="sdkclk.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="user.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
@@ -96,5 +138,19 @@
     <None Include="def.def">
       <Filter>源文件</Filter>
     </None>
+    <None Include="sdkclk.acf">
+      <Filter>rpc</Filter>
+    </None>
+    <None Include="sdkdef.acf">
+      <Filter>rpc</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Midl Include="sdkclk.idl">
+      <Filter>rpc</Filter>
+    </Midl>
+    <Midl Include="sdkdef.idl">
+      <Filter>rpc</Filter>
+    </Midl>
   </ItemGroup>
 </Project>

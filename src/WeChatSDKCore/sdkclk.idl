@@ -1,0 +1,11 @@
+[
+    uuid(B3A3F08E-FB79-4673-82E2-185BCF29AA99),
+    version(1.0)
+]
+
+interface WechatSDKClk
+{
+    int WSDKClkRecvTextMsg([in]unsigned int funptr, [in]int pid, [in, string]wchar_t* wxid, [in, string]wchar_t* msg);
+    int WSDKClkRecvTransferMsg([in]unsigned int funptr, [in]int pid, [in, string]wchar_t* wxid, [in, string]wchar_t* tid, [in, string]wchar_t* msg);
+    int WSDKClkRecvPayMsg([in]unsigned int funptr, [in]int pid, [in, string]wchar_t* wxid, [in, string]wchar_t* tid, [in, string]wchar_t* msg);
+}

@@ -1,4 +1,10 @@
 # 更新日志
+
+**2019年3月8日**
+1. 发布Python、Java、C#的SDK，版本1.3.0
+2. 升级防撤消功能，有撤销提醒
+3. 增加接受消息接口（3种）
+
 **2019年2月24日**
 1. 开放WeChatSDK，提供丰富的操作微信的接口
 2. 保留v1.1.3老版本，[下载地址](https://github.com/anhkgg/SuperWeChatPC/tree/master/bin)

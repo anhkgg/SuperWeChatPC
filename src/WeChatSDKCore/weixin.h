@@ -62,30 +62,32 @@ typedef struct _wxmsg
 
 ////////////////////////////////////////////////////////////////////
 //联系人
-typedef struct _USERINFO_NAME
+typedef struct _WXBUFFER
 {
     union {
-        char nick[0x10];
+        char buf[0x10];
         struct {
-            char* nickbuf;
+            char* buf;
             DWORD unk1;
             DWORD unk2;
             DWORD unk3;
         } p;
-    } nick;
-    DWORD nick_len;//10
-    DWORD nick_len1;//14 >0x10 使用nickbuf
-}USERINFO_NAME;//18
+    } buf;
+    DWORD buf_len;//10
+    DWORD buf_len1;//14 >0x10 使用nickbuf
+}WxBuffer, *PWxBuffer;//18
 
 typedef struct _USERINFO0
 {
     char unk1[0x3c];//
-    USERINFO_NAME wxid;//3c
-    USERINFO_NAME infox;//54
-    USERINFO_NAME infox1;//6c
+    WxBuffer wxid;//3c
+    WxBuffer infox;//54
+    WxBuffer infox1;//6c
     char unk6[0x30];//84
-    USERINFO_NAME nick;;//b4
-} USERINFO;
+    WxBuffer nick;;//b4
+    char unk7[0x14c];//cc
+    WxBuffer name;//218
+} LoginUser;
 
 typedef struct _USERINFO
 {
@@ -153,11 +155,15 @@ typedef struct _USERINFO
 #pragma pack(pop)
 
 
-int FakeRevokeMsg();
-void RestoreRevokeMsg();
+int CoreFakeRevokeMsg();
+void CoreRestoreRevokeMsg();
 
-int SaveVoiceMsg(wchar_t *path);
-int UnSaveVoiceMsg(void);
+int CoreSaveVoiceMsg(wchar_t *path);
+int CoreUnSaveVoiceMsg(void);
 
-int SendTxtMsg(WCHAR* wxid, WCHAR* msg);
-int SendImageMsg(WCHAR* wxid, WCHAR* path);
+int CoreSendTxtMsg(WCHAR* wxid, WCHAR* msg);
+int CoreSendImageMsg(WCHAR* wxid, WCHAR* path);
+
+int CoreRecvTextMsg(unsigned int funptr);
+int CoreRecvTransferMsg(unsigned int funptr);
+int CoreRecvPayMsg(unsigned int funptr);

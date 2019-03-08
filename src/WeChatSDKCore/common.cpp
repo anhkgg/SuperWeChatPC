@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "common.h"
 #include "util.h"
+#include "mhook.h"
 
 bool IsSupportedWxVersion(
     const SuppWxCfg* cfg,
@@ -45,4 +46,26 @@ bool IsSupportedWxVersion(
     }
 
     return false;
+}
+
+int HookTemplate(HMODULE hMod, const SuppWxCfg* OffArray, int len, PVOID* orig, PVOID fake)
+{
+    DWORD offset = 0;
+    if (IsSupportedWxVersion(
+        OffArray,
+        len,
+        &offset))
+    {
+        *orig = (PVOID)((DWORD)hMod + offset);
+        if (!Mhook_SetHook((PVOID*)orig, fake)) {
+            *orig = NULL;
+            return ERROR_INVALID_ADDRESS;
+        }
+        else {
+            return ERROR_SUCCESS;
+        }
+    }
+    else {
+        return ERROR_NOT_SUPPORTED;
+    }
 }

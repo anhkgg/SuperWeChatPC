@@ -135,7 +135,7 @@ int __stdcall fakeVoiceDecodeInternal(int voice, int size, int from, int a4)
     return pfnVoiceDecodeInternal(voice, size, from, a4);
 }
 
-int SaveVoiceMsg(wchar_t *path)
+int CoreSaveVoiceMsg(wchar_t *path)
 {
     HMODULE hMod = GetModuleHandle(WECHATWINDLL);
     if (hMod == NULL) {
@@ -163,7 +163,7 @@ int SaveVoiceMsg(wchar_t *path)
     }
 }
 
-int UnSaveVoiceMsg(void)
+int CoreUnSaveVoiceMsg(void)
 {
     PVOID* p = GetOrigVocieDecodeInternal();
     if (*p) {
