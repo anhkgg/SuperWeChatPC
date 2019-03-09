@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "openwechat.h"
+#include "util.h"
 
 #include <Windows.h>
 #include <TlHelp32.h>
@@ -253,30 +254,17 @@ int OpenWeChat(DWORD* pid)
         return ret;
     }*/
 
-    //HKEY_CURRENT_USER\Software\Tencent\WeChat InstallPath = xx
-    HKEY hKey = NULL;
-    if (ERROR_SUCCESS != RegOpenKey(HKEY_CURRENT_USER, L"Software\\Tencent\\WeChat", &hKey))
-    {
-        ret = GetLastError();
+    WCHAR Path[MAX_PATH] = { 0 };
+    ret = GetWeChatPath(Path);
+    if (ERROR_SUCCESS != ret) {
         return ret;
     }
-
-    DWORD Type = REG_SZ;
-    WCHAR Path[MAX_PATH] = { 0 };
-    DWORD cbData = MAX_PATH * sizeof(WCHAR);
-    if (ERROR_SUCCESS != RegQueryValueEx(hKey, L"InstallPath", 0, &Type, (LPBYTE)Path, &cbData))
-    {
-        ret = GetLastError();
-        goto __exit;
-    }
-
-    PathAppend(Path, L"WeChat.exe");
 
     //ShellExecute(NULL, L"Open", Path, NULL, NULL, SW_SHOW);
 
     if (!CreateProcess(NULL, Path, NULL, NULL, FALSE, CREATE_NEW_CONSOLE, NULL, NULL, &si, &pi)) {
         ret = GetLastError();
-        goto __exit;
+        return ret;
     }
 
     CloseHandle(pi.hThread);
@@ -286,10 +274,5 @@ int OpenWeChat(DWORD* pid)
 
     ret = ERROR_SUCCESS;
 
-__exit:
-    if (hKey)
-    {
-        RegCloseKey(hKey);
-    }
     return ret;
 }

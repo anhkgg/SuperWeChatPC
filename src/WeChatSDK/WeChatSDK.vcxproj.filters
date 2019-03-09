@@ -51,6 +51,9 @@
     <ClInclude Include="rpcutil.h">
       <Filter>rpc</Filter>
     </ClInclude>
+    <ClInclude Include="util.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -78,6 +81,9 @@
       <Filter>rpc</Filter>
     </ClCompile>
     <ClCompile Include="sdkclk.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="util.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

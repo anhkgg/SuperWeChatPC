@@ -5,6 +5,7 @@
 #include "openwechat.h"
 #include "sdk.h"
 #include "inject.h"
+#include "util.h"
 
 //#include "../common/sdkinf.h"
 #include "../WeChatSDKCore/sdkdef_h.h"
@@ -156,6 +157,11 @@ int WXUninitialize(DWORD pid)
         return ERROR_SUCCESS;
     }
     return -1;
+}
+
+int WXGetWechatVersion(wchar_t* version)
+{
+    return GetWeChatVersion(version);
 }
 
 bool WXIsWechatSDKOk(DWORD pid)

@@ -165,6 +165,7 @@ copy "sdk.h" "../../sdk/sdk.h"</Command>
     <ClInclude Include="sdk.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="util.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\common\rpc.cpp">
@@ -187,6 +188,7 @@ copy "sdk.h" "../../sdk/sdk.h"</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="util.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="sdk.def" />
