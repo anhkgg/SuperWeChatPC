@@ -141,14 +141,8 @@ void fakeRecvMoneyInternal(pwxmsg msg)
 
             wchar_t money1[100] = { 0 };
             int mm = _wtoi(money);
-            if (mm < 100) {
-                double m = (double)mm / 100;
-                StringCbPrintfW(money1, 100, L"%.2f", m);
-            }
-            else {
-                int m = mm / 100;
-                StringCbPrintfW(money1, 100, L"%d", m);
-            }            
+            double m = (double)mm / 100;
+            StringCbPrintfW(money1, 100, L"%.2f", m);         
 
             if (money && username) {
 
