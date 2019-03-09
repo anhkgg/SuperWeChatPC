@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatSDK", "..\WeChatSDK\W
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatSDKTest", "..\WeChatSDKTest\WeChatSDKTest.vcxproj", "{00EC6E77-8926-4860-A73F-3E5DBBE6221B}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "inject", "..\inject\inject.vcxproj", "{F1DD9E37-B005-40EA-9A61-C952F08A35E9}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -43,14 +41,6 @@ Global
 		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Release|x64.Build.0 = Release|x64
 		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Release|x86.ActiveCfg = Release|Win32
 		{00EC6E77-8926-4860-A73F-3E5DBBE6221B}.Release|x86.Build.0 = Release|Win32
-		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Debug|x64.ActiveCfg = Debug|x64
-		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Debug|x64.Build.0 = Debug|x64
-		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Debug|x86.ActiveCfg = Debug|Win32
-		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Debug|x86.Build.0 = Debug|Win32
-		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Release|x64.ActiveCfg = Release|x64
-		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Release|x64.Build.0 = Release|x64
-		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Release|x86.ActiveCfg = Release|Win32
-		{F1DD9E37-B005-40EA-9A61-C952F08A35E9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
