@@ -17,7 +17,7 @@
 
 **`WeChatSDK`目前已经开放`C++`、`Python`、`Java`、`C#`接口。** 具体请看[WeChatSDK开发指南](docs/sdk.md)。
 
-更新详情请看[更新日志](update.md)
+更新详情请看[更新日志](docs/update.md)
 
 刚发布几天，发现在几个下载站出现了`SuperWeChatPC`的下载，特此加上编译好的文件`hash`信息，请下载后自行检查文件是否被修改。
 

@@ -8,7 +8,7 @@
 
 `WeChatSDK.dll`内部通过`RPC`通信和注入到微信进程的`WeChatSDKCore.dll`进行功能调用，支持多开微信功能的调用，微信间互不影响。
 
-在新版本（`1.3.0`）中，`WeChatRs`、`WeChatRc`是虚拟模块，代码何如到`WeChatSDKCore`和`WeChatSDK`中，并且实现了RPC双向通信，用于支持`WeChatSDK`设置回调。
+在新版本（`1.3.0`）中，`WeChatRs`、`WeChatRc`是虚拟模块，代码合入到`WeChatSDKCore`和`WeChatSDK`中，并且实现了RPC双向通信，用于支持`WeChatSDK`设置回调。
 
 ## WeChatSDK使用
 
