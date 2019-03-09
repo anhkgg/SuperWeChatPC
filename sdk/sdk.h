@@ -6,6 +6,8 @@ int WXInitialize(DWORD pid);
 int WXUninitialize(DWORD pid);
 bool WXIsWechatSDKOk(DWORD pid);
 
+int WXGetWechatVersion(wchar_t* version);
+
 int WXGetWechat(const wchar_t* wxid);//打开已经启动的微信
 
 int WXAntiRevokeMsg(DWORD pid);
