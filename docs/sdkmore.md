@@ -53,7 +53,7 @@ public class TestJavaSDK {
 
 ## C#
 
-发布`Java`版本的接口，具体使用见`sdk/WeChatSDK.cs`和`TestSDK.cs`。
+发布`C#`版本的接口，具体使用见`sdk/WeChatSDK.cs`和`TestSDK.cs`。
 
 ```
 //需管理员运行
