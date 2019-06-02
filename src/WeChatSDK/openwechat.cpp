@@ -225,7 +225,7 @@ int PatchWeChat()
                         ret = GetLastError();
                     }
 
-                    goto Exit0;
+                    //goto Exit0;
                 }
             }
 
