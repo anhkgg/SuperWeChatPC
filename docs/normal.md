@@ -14,7 +14,9 @@ SuperWeChat.exe c:\wxmsg
 
 ### 2. 仅需要多开
 
-下载[bin/WeChat多开v0.0.1.exe](https://github.com/anhkgg/SuperWeChatPC/raw/master/bin/WeChat%E5%A4%9A%E5%BC%80v0.0.1.exe)，双击即可直接使用。
+~~下载[bin/WeChat多开v0.0.1.exe](https://github.com/anhkgg/SuperWeChatPC/raw/master/bin/WeChat%E5%A4%9A%E5%BC%80v0.0.1.exe)，双击即可直接使用。~~
+
+**请注意：** 由于微信更新，`2.6.8.52`以后，老版本`WeChat多开v0.0.1.exe`已经失效，请直接使用[sdk/SuperWechat.zip](https://github.com/anhkgg/SuperWeChatPC/raw/master/sdk/SuperWeChat.zip)，也可通过公众号获取。
 
 ### 3. 老版本v1.1.3
 
