@@ -9,11 +9,11 @@
 #include <string>
 #include <vector>
 
-const SuppWxCfg g_Supported_ExtendChatView_handleDropFile_Version[] = {
+const SuppWxCfg g_Supported_Wechat_handleDropFile_Version[] = {
     { TEXT("2.6.8.65"), 0xDF347 + 2 ,{6, {0x00, 0x00, 0x40, 0x06, 0x0F, 0x8C}, 6, {0x00, 0x00, 0x00, 0x00, 0x0f, 0x8D}}},
 };
 
-const SuppWxCfg g_Supported_ExtendChatView_RealDropFile_Version[] = {
+const SuppWxCfg g_Supported_Wechat_RealDropFile_Version[] = {
     { TEXT("2.6.8.65"), 0x9A34C + 2 ,{6, {0x00, 0x00, 0x40, 0x06, 0x0F, 0x8C}, 6, {0x00, 0x00, 0x00, 0x00, 0x0f, 0x8D}}},
 };
 
@@ -215,7 +215,7 @@ bool ExtendSendFile(DWORD dwEcx, wchar_t* wxid, WCHAR* filepath)
     return false;
 }
 
-bool fakeExtendChatViewSendMsgInternal(DWORD dwEcx, wchar_t* wxid, wchar_t* filepath)
+bool fakeWechatSendMsgInternal(DWORD dwEcx, wchar_t* wxid, wchar_t* filepath)
 {
     int filesize = XxGetFileSize(filepath);
     if (filesize > FILE_SIZE_100M) {
@@ -225,7 +225,7 @@ bool fakeExtendChatViewSendMsgInternal(DWORD dwEcx, wchar_t* wxid, wchar_t* file
     return false;
 }
 
-void __stdcall fakeExtendChatViewSendMsg1(int unk, wchar_t* wxid, int len1, int maxlen1, int unk1, int unk2, wchar_t* path, int len2, int maxlen2, int unk3, int unk4, int a1, int a2, int a3, int a4, int a5, int a6)
+void __stdcall fakeWechatSendMsg1(int unk, wchar_t* wxid, int len1, int maxlen1, int unk1, int unk2, wchar_t* path, int len2, int maxlen2, int unk3, int unk4, int a1, int a2, int a3, int a4, int a5, int a6)
 {
     DWORD dwEcx;
     __asm {
@@ -234,7 +234,7 @@ void __stdcall fakeExtendChatViewSendMsg1(int unk, wchar_t* wxid, int len1, int 
         mov dwEcx, ecx;
     }
 
-    if (fakeExtendChatViewSendMsgInternal(dwEcx, wxid, path)) {
+    if (fakeWechatSendMsgInternal(dwEcx, wxid, path)) {
         /*__asm {
             popfd;
             popad;
@@ -295,16 +295,16 @@ int EnableDropFileEx()
     DWORD code_count2 = 6;
     DWORD offset2 = 0;
     if (!IsSupportedWxVersion(
-        g_Supported_ExtendChatView_handleDropFile_Version,
-        ARRAYSIZE(g_Supported_ExtendChatView_handleDropFile_Version),
+        g_Supported_Wechat_handleDropFile_Version,
+        ARRAYSIZE(g_Supported_Wechat_handleDropFile_Version),
         &offset,
         NULL,
         NULL,
         code,
         &code_count) ||
         !IsSupportedWxVersion(
-            g_Supported_ExtendChatView_RealDropFile_Version,
-            ARRAYSIZE(g_Supported_ExtendChatView_RealDropFile_Version),
+            g_Supported_Wechat_RealDropFile_Version,
+            ARRAYSIZE(g_Supported_Wechat_RealDropFile_Version),
             &offset1,
             NULL,
             NULL,
@@ -327,11 +327,11 @@ int EnableDropFileEx()
         return GetLastError();
     }
 
-    //ExtendChatView_handleDropFile
+    //Wechat_handleDropFile
     PVOID addr = (BYTE*)hMod + offset;
     Patch(addr, code_count, code);
 
-    //ExtendChatView_RealDropFile
+    //Wechat_RealDropFile
     PVOID addr1 = (BYTE*)hMod + offset1;
     Patch(addr1, code_count1, code1);
 
@@ -339,7 +339,7 @@ int EnableDropFileEx()
     PVOID addr2 = (BYTE*)hMod + offset2;
     Patch(addr2, code_count2, code2);
 
-    //ExtendChatView_handleDropFile
+    //Wechat_handleDropFile
     /*
     filesize > 100M
     .text:100DF347 07C 81 FE 00 00 40 06                             cmp     esi, 6400000h
@@ -350,7 +350,7 @@ int EnableDropFileEx()
     //char PatchCode1[6] = { 0x00, 0x00, 0x00, 0x00,/*cmp esi, 0*/
     //                       0x0f, 0x8D}; /*jge, jnl*/
 
-    //ExtendChatView_RealDropFile
+    //Wechat_RealDropFile
     /*
     filesize > 100M
     .text:1009A34C 0AC 81 FE 00 00 40 06                             cmp     esi, 6400000h
@@ -381,7 +381,7 @@ int EnableDropFileEx()
             g_Supported_AppMsgMgr__sendFile_Version,
             ARRAYSIZE(g_Supported_AppMsgMgr__sendFile_Version),
             (PVOID*)&pfn_AppMsgMgr__sendFile,
-            fakeExtendChatViewSendMsg1);
+            fakeWechatSendMsg1);
     }
 
     return ret;
