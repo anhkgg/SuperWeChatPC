@@ -9,7 +9,7 @@ extern WxFuncConfig g_WxFuncConfig;
 
 bool InitHook()
 {
-    
+    EnableDropFileEx();
     return true;
 }
 
