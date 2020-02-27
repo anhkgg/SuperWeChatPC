@@ -92,7 +92,8 @@ BOOL IsTargetPid(DWORD Pid, DWORD* Pids, int num)
 
 int PatchWeChat()
 {
-    DWORD dwSize = 0;
+    DWORD dwSize = 0x1000;
+    DWORD dwRequiredSize = 0;
     POBJECT_NAME_INFORMATION pNameInfo;
     POBJECT_NAME_INFORMATION pNameType;
     PVOID pbuffer = NULL;
@@ -101,7 +102,7 @@ int PatchWeChat()
     DWORD dwFlags = 0;
     char szType[128] = { 0 };
     char szName[512] = { 0 };
-    PSYSTEM_HANDLE_INFORMATION1 pHandleInfo = NULL;
+    PSYSTEM_HANDLE_INFORMATION_EX pHandleInfo = NULL;
     DWORD Pids[100] = { 0 };
     int ret = -1;
 
@@ -118,57 +119,42 @@ int PatchWeChat()
         goto Exit0;
     }
 
-    pbuffer = VirtualAlloc(NULL, 0x1000, MEM_COMMIT, PAGE_READWRITE);
-
-    if (!pbuffer)
+    // 保证程序的正确性
+    do
     {
-        goto Exit0;
-    }
-
-    Status = ZwQuerySystemInformation(SystemHandleInformation, pbuffer, 0x1000, &dwSize);
-
-    if (!NT_SUCCESS(Status))
-    {
-        if (STATUS_INFO_LENGTH_MISMATCH != Status)
+        pbuffer = VirtualAlloc(NULL, dwSize, MEM_COMMIT, PAGE_READWRITE);
+        if (!pbuffer)
         {
+            printf ("Alloc Memory for System Handler Info failed!\n");
             goto Exit0;
         }
-        else
+
+        Status = ZwQuerySystemInformation(SystemHandleInformation, pbuffer, dwSize, &dwRequiredSize);
+        if (!NT_SUCCESS(Status))
         {
-            // 这里大家可以保证程序的正确性使用循环分配稍好
-            if (NULL != pbuffer)
+            if (Status == STATUS_INFO_LENGTH_MISMATCH)
             {
-                VirtualFree(pbuffer, 0, MEM_RELEASE);
+                if (pbuffer)
+                {
+                    VirtualFree(pbuffer, 0, MEM_RELEASE);
+                    pbuffer = NULL;
+                }
+                dwSize += dwRequiredSize;
             }
-
-            if (dwSize * 2 > 0x4000000)  // MAXSIZE
+            else
             {
-                goto Exit0;
-            }
-
-            pbuffer = VirtualAlloc(NULL, dwSize * 2, MEM_COMMIT, PAGE_READWRITE);
-
-            if (!pbuffer)
-            {
-                goto Exit0;
-            }
-
-            Status = ZwQuerySystemInformation(SystemHandleInformation, pbuffer, dwSize * 2, NULL);
-
-            if (!NT_SUCCESS(Status))
-            {
+                printf("Get System Hanlder Info failed : 0x%X\n", Status);
                 goto Exit0;
             }
         }
-    }
+    } while (Status == STATUS_INFO_LENGTH_MISMATCH);
 
-    pHandleInfo = (PSYSTEM_HANDLE_INFORMATION1)pbuffer;
+    pHandleInfo = (PSYSTEM_HANDLE_INFORMATION_EX)pbuffer;
 
     for (nIndex = 0; nIndex < pHandleInfo->NumberOfHandles; nIndex++)
     {
         if (IsTargetPid(pHandleInfo->Handles[nIndex].UniqueProcessId, Pids, Num))
         {
-            //
             HANDLE hHandle = DuplicateHandleEx(pHandleInfo->Handles[nIndex].UniqueProcessId,
                 (HANDLE)pHandleInfo->Handles[nIndex].HandleValue,
                 DUPLICATE_SAME_ACCESS
@@ -194,14 +180,14 @@ int PatchWeChat()
             pNameInfo = (POBJECT_NAME_INFORMATION)szName;
             pNameType = (POBJECT_NAME_INFORMATION)szType;
 
-            WCHAR TypName[1024] = { 0 };
+            WCHAR TypeName[1024] = { 0 };
             WCHAR Name[1024] = { 0 };
 
-            wcsncpy_s(TypName, (WCHAR*)pNameType->Name.Buffer, pNameType->Name.Length / 2);
+            wcsncpy_s(TypeName, (WCHAR*)pNameType->Name.Buffer, pNameType->Name.Length / 2);
             wcsncpy_s(Name, (WCHAR*)pNameInfo->Name.Buffer, pNameInfo->Name.Length / 2);
 
             // 匹配是否为需要关闭的句柄名称
-            if (0 == wcscmp(TypName, L"Mutant"))
+            if (0 == wcscmp(TypeName, L"Mutant"))
             {
                 //WeChat_aj5r8jpxt_Instance_Identity_Mutex_Name
                 //if (wcsstr(Name, L"_WeChat_App_Instance_Identity_Mutex_Name"))
@@ -228,8 +214,10 @@ int PatchWeChat()
                     //goto Exit0;
                 }
             }
-
-            CloseHandle(hHandle);
+            else
+            {
+                CloseHandle(hHandle);
+            }
         }
 
     }
