@@ -92,7 +92,8 @@ BOOL IsTargetPid(DWORD Pid, DWORD* Pids, int num)
 
 int PatchWeChat()
 {
-    DWORD dwSize = 0;
+    DWORD dwSize = 0x1000;
+    DWORD dwRequiredSize = 0;
     POBJECT_NAME_INFORMATION pNameInfo;
     POBJECT_NAME_INFORMATION pNameType;
     PVOID pbuffer = NULL;
@@ -118,49 +119,35 @@ int PatchWeChat()
         goto Exit0;
     }
 
-    pbuffer = VirtualAlloc(NULL, 0x1000, MEM_COMMIT, PAGE_READWRITE);
-
-    if (!pbuffer)
+    // 保证程序的正确性
+    do
     {
-        goto Exit0;
-    }
-
-    Status = ZwQuerySystemInformation(SystemHandleInformation, pbuffer, 0x1000, &dwSize);
-
-    if (!NT_SUCCESS(Status))
-    {
-        if (STATUS_INFO_LENGTH_MISMATCH != Status)
+        pbuffer = VirtualAlloc(NULL, dwSize, MEM_COMMIT, PAGE_READWRITE);
+        if (!pbuffer)
         {
+            printf ("Alloc Memory for System Handler Info failed!\n");
             goto Exit0;
         }
-        else
+
+        Status = ZwQuerySystemInformation(SystemHandleInformation, pbuffer, dwSize, &dwRequiredSize);
+        if (!NT_SUCCESS(Status))
         {
-            // 这里大家可以保证程序的正确性使用循环分配稍好
-            if (NULL != pbuffer)
+            if (Status == STATUS_INFO_LENGTH_MISMATCH)
             {
-                VirtualFree(pbuffer, 0, MEM_RELEASE);
+                if (pbuffer)
+                {
+                    VirtualFree(pbuffer, 0, MEM_RELEASE);
+                    pbuffer = NULL;
+                }
+                dwSize += dwRequiredSize;
             }
-
-            if (dwSize * 2 > 0x4000000)  // MAXSIZE
+            else
             {
-                goto Exit0;
-            }
-
-            pbuffer = VirtualAlloc(NULL, dwSize * 2, MEM_COMMIT, PAGE_READWRITE);
-
-            if (!pbuffer)
-            {
-                goto Exit0;
-            }
-
-            Status = ZwQuerySystemInformation(SystemHandleInformation, pbuffer, dwSize * 2, NULL);
-
-            if (!NT_SUCCESS(Status))
-            {
+                printf("Get System Hanlder Info failed : 0x%X\n", Status);
                 goto Exit0;
             }
         }
-    }
+    } while (Status == STATUS_INFO_LENGTH_MISMATCH);
 
     pHandleInfo = (PSYSTEM_HANDLE_INFORMATION_EX)pbuffer;
 
