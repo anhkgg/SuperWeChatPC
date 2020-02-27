@@ -6,8 +6,15 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatSDKCore", "WeChatResource.vcxproj", "{CC8544D5-1A6E-4515-B737-4DA205371032}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatSDK", "..\WeChatSDK\WeChatSDK.vcxproj", "{3863B180-E079-4735-ABF7-13552EE0C3F1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CC8544D5-1A6E-4515-B737-4DA205371032} = {CC8544D5-1A6E-4515-B737-4DA205371032}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WeChatSDKTest", "..\WeChatSDKTest\WeChatSDKTest.vcxproj", "{00EC6E77-8926-4860-A73F-3E5DBBE6221B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{3863B180-E079-4735-ABF7-13552EE0C3F1} = {3863B180-E079-4735-ABF7-13552EE0C3F1}
+		{CC8544D5-1A6E-4515-B737-4DA205371032} = {CC8544D5-1A6E-4515-B737-4DA205371032}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
