@@ -228,8 +228,10 @@ int PatchWeChat()
                     //goto Exit0;
                 }
             }
-
-            CloseHandle(hHandle);
+            else
+            {
+                CloseHandle(hHandle);
+            }
         }
 
     }
