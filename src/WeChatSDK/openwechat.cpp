@@ -101,7 +101,7 @@ int PatchWeChat()
     DWORD dwFlags = 0;
     char szType[128] = { 0 };
     char szName[512] = { 0 };
-    PSYSTEM_HANDLE_INFORMATION1 pHandleInfo = NULL;
+    PSYSTEM_HANDLE_INFORMATION_EX pHandleInfo = NULL;
     DWORD Pids[100] = { 0 };
     int ret = -1;
 
@@ -162,13 +162,12 @@ int PatchWeChat()
         }
     }
 
-    pHandleInfo = (PSYSTEM_HANDLE_INFORMATION1)pbuffer;
+    pHandleInfo = (PSYSTEM_HANDLE_INFORMATION_EX)pbuffer;
 
     for (nIndex = 0; nIndex < pHandleInfo->NumberOfHandles; nIndex++)
     {
         if (IsTargetPid(pHandleInfo->Handles[nIndex].UniqueProcessId, Pids, Num))
         {
-            //
             HANDLE hHandle = DuplicateHandleEx(pHandleInfo->Handles[nIndex].UniqueProcessId,
                 (HANDLE)pHandleInfo->Handles[nIndex].HandleValue,
                 DUPLICATE_SAME_ACCESS
@@ -194,14 +193,14 @@ int PatchWeChat()
             pNameInfo = (POBJECT_NAME_INFORMATION)szName;
             pNameType = (POBJECT_NAME_INFORMATION)szType;
 
-            WCHAR TypName[1024] = { 0 };
+            WCHAR TypeName[1024] = { 0 };
             WCHAR Name[1024] = { 0 };
 
-            wcsncpy_s(TypName, (WCHAR*)pNameType->Name.Buffer, pNameType->Name.Length / 2);
+            wcsncpy_s(TypeName, (WCHAR*)pNameType->Name.Buffer, pNameType->Name.Length / 2);
             wcsncpy_s(Name, (WCHAR*)pNameInfo->Name.Buffer, pNameInfo->Name.Length / 2);
 
             // 匹配是否为需要关闭的句柄名称
-            if (0 == wcscmp(TypName, L"Mutant"))
+            if (0 == wcscmp(TypeName, L"Mutant"))
             {
                 //WeChat_aj5r8jpxt_Instance_Identity_Mutex_Name
                 //if (wcsstr(Name, L"_WeChat_App_Instance_Identity_Mutex_Name"))
